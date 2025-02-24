@@ -1,0 +1,43 @@
+{% extends 'partials/base.html' %}
+{% block title %}Profile{% endblock %}
+{% load crispy_forms_tags %}
+{% block content %}
+{% load static %}
+<style>
+    span{
+        font-size: x-large;
+        color: whitesmoke;
+    }
+</style>
+<div class="bg-dark">
+<div class="container my-1 bg-success" style="background-color: wheat;">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card shadow my-3">
+                <div class="card-body">
+                    {% if messages %}
+                    {% for message in messages %}
+                    <div class="alertt {{ message.tags }} text-danger text-center" style="font-size: larger; font-weight: bold; font-style: italic;">{{ message }}</div>
+                    {% endfor %}
+                    {% endif %}
+                    <h3 class="text-primary">My Details:</h3><br>
+                    {% if user %}
+                    <span class="text-dark">Profile Picture: </span><img src="{{request.user.author.profile_picture.url}}" alt="" style="width: 150px; height: 150px; object-fit: cover; border: 1px solid black;"><hr>
+                    <div class="alert text-white bg-dark">
+                        <p><span>Username: </span> {{ user.username }}</p>
+                        <p> <span>Full Name: </span> {{ user.first_name }} {{ user.last_name }}</p>
+                        <p><span>Email Address: </span> {{ user.email }}</p>
+                        <p><span>Phone Number: </span> {{ request.user.author.phone_number }}</p>
+                        <p><span>Brief Description: </span> {{ request.user.author.brief_description }}</p>
+                        {% endif %}
+                        <h3>Do you want to Edit your Profile? <a class="edit-profile" href="{% url 'users-edit_profile' %}" role="button" data-bs-toggle="" aria-expanded="false">EDIT PROFILE</a></h3>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+{% include 'partials/footer.html' %} 
+{% endblock %}

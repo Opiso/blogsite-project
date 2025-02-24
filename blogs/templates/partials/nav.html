@@ -1,0 +1,91 @@
+{% load static %}
+<nav class="navbar navbar-expand-lg bg-success sticky-top">
+  <div>
+    
+    <a class="nav-link" href="{% url 'blog-index' %}"><h3 class="navbar-brand fw-bold fs-3" id="logo_head">
+      Let's Blogg....</h3>
+    </a>
+  </div>
+    <div class="container container-fluid">
+      <div class="">
+      </div>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+      <div class="row row1 collapse navbar-collapse " id="navbarSupportedContent">
+        <div class="d-flex " id="linked" style="height: 50px;">
+          <ul class="navbar-nav me-auto mb-lg-0 d-flex fs-3" id="list">
+            <li class="nav-item" id="item">
+              <a class="nav-link pt-0 home" id="home" aria-current="page" href="{% url 'blog-index' %}">Home</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link ms-2 pt-0 home" href="{% url 'blog-about' %}">About Us</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link ms-2 pt-0 home" href="{% url 'blog-contact' %}">Contact Us</a>
+            </li>
+          </ul>
+          <style>
+            .homie{
+              color: red;
+              text-decoration: underline;
+            }
+          </style>
+
+          <ul class="navbar-nav ms-auto mb-lg-0 d-flex" >
+              {% if request.user.is_authenticated %}
+
+            <li>
+              <a class="nav-link me-3 fs-5" href="{% url 'users-profile' %}" role="button" data-bs-toggle="" aria-expanded="false">
+                {% if request.user.author.profile_picture %}
+                <img src="{{request.user.author.profile_picture.url}}" alt="" style="width: 23px; height: 23px; object-fit: cover; border-radius: 50%;">
+                {% else %}
+                <img src="{{ MEDIA_URL }}login-icon.jpg" alt="img" style="width: 23px; height: 23px; border-radius: 50%; margin-right: -7px;">              
+                {% endif %}
+                Profile
+              </a>
+            </li>
+
+            
+              <form action="{% url 'users-logout' %}" method="POST" id="logout-form" style="display: non;">
+                {% csrf_token %}
+                <button class="nav-link text-white me-2 fs-5" type="submit" style="display: none;">Logout</button>
+            </form>
+          <li>
+            <a class="nav-link fs-5 ms-2 me-5" href="#" role="button" data-bs-toggle="" aria-expanded="false" onclick="document.getElementById('logout-form').submit();">
+              Logout
+            </a>
+          </li>
+              {% else %}
+
+            <li>
+              <a class="nav-link me-4" href="{% url 'users-login' %}" role="button" data-bs-toggle="" aria-expanded="false">
+                <img src="{{ MEDIA_URL }}login-icon.jpg" alt="img" style="width: 25px; height: 25px; border-radius: 50%; margin-right: -4px;">
+                Login
+              </a>  
+            </li>
+              {% endif %}
+          </ul>
+        </div>      
+        <div class="d-flex row row2">
+            <form class="d-flex me-3" role="search">
+                <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+                <button class="btn btn-outline-success search" type="submit">Search</button>
+            </form>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <script>
+    function highlightLink(element) {
+        // Remove the highlight class from all links
+        var links = document.querySelectorAll('.home');
+        links.forEach(function(link) {
+            link.classList.remove('homie');
+        });
+
+        // Add the highlight class to the clicked link
+        element.classList.add('homie');
+    }
+</script>

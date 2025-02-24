@@ -1,0 +1,205 @@
+#navbarSupportedContent #linked #list #item  {
+    color: white;
+}
+#navbarSupportedContent #linked #list #item:hover {
+    color: white;
+}
+.headtag a:hover {
+    color: rgb(92, 102, 80);
+}
+.headtag:hover{
+    color: blueviolet;
+    transition: 2s ease-in;
+}
+#heady{
+    color: red;
+    background-color: yellow;
+}
+#linked ul li a {
+    color: white;
+
+}
+/* #linked ul li {
+    color: white;
+    padding-top: 0;
+    margin-top: 0;
+    text-decoration: none;
+} */
+.homie{
+    color: rgb(5, 238, 238);
+    text-decoration: underline;
+}
+#linked ul li a:hover {
+    background-color: rgb(74, 136, 74);
+    border-radius: 10%;
+    color: white;
+    border-bottom: 1px solid white;
+    transition: 0.5s ease;
+} 
+.row2 form button{
+    color: white;
+}
+.row2 form button:hover{
+    color: black;
+    background-color: rgb(171, 191, 245);
+    transition: 0.5s ease;
+
+
+}
+
+#logo_head {
+    position: relative;
+    font-size: 14px;
+    color: #fffdfd;
+    padding: 22px; 
+    text-align: center;
+    background-image: url("/static/images/favicon.jpg"); 
+    background-size: cover; /* Make the background image cover the whole area */
+    background-position: center center; /* Center the background image */
+
+   /*background-color: #706363;  Fallback background color */
+    transition: background-image 1s ease; /* Smooth transition for background */
+}
+
+/* Hover effect */
+#logo_head:hover {
+    color: rgba(0, 128, 0, 0.705); /* Changes the text color when hovered */
+    font-weight: 100;
+    transition: 0.5s ease;
+}
+
+div .update_btn:hover{
+    background-color: green;
+    color: white;
+}
+div .cancel_btn:hover{
+    background-color: gray;
+    color: white;
+}
+.edit-profile{
+    text-decoration: none;
+}
+.edit-profile:hover{
+    color: blueviolet;
+    border-bottom: 1px solid blueviolet;
+    transition: 1s ease-in;
+}
+
+.username{
+    text-decoration: none;
+    color: black;
+    text-transform: capitalize;
+    font-size: small;
+    font-style: italic;
+    font-weight: bold;
+}
+.username:hover{
+    color: blue;
+    transition: 0.2s ease;
+}
+#navbarSupportedContent{
+    line-height: 1.25;
+}
+.see-more {
+    color: #007bff;
+    cursor: pointer;
+    text-decoration: none;
+
+}
+
+.see-more:hover {
+    color: blueviolet;
+    text-decoration: underline;
+    transition: 0.2s ease;
+
+}
+
+.fa {
+    padding: 10px;
+    font-size: 23px;
+    width: 40px;
+    text-align: center;
+    text-decoration: none;
+    margin: 5px 2px;
+    border-radius: 50%;
+  }
+
+  .fa:hover {
+    opacity: 0.4;
+    text-decoration: none;
+  }
+
+  .fa-facebook {
+    background: #3B5998;
+    color: white;
+    margin-top: 10px;
+    
+  }
+
+  .fa-whatsapp {
+    background: #25d366;
+    color: white;
+    margin: 0 20px;
+  }
+
+  .fa-twitter {
+    background: #55ACEE;
+    color: white;
+    margin: 20px;
+  }
+
+  .fa-instagram {
+    background: #125688;
+    color: white;
+  }
+  .sideframe{
+    background-image: url('/static/images/pond.jpeg');  /* Adjust the path to your image */
+    background-size: cover; /* Make sure the background covers the entire viewport */
+    background-position: center center;
+    position: relative;
+    min-height: 100vh; /* Make the body take up the full height of the viewport */
+    margin: 0;
+  }
+  .fish {
+    position: absolute;
+    width: 100px;  /* Adjust the size of the fish */
+    height: 100vh;
+    background-image: url('/static/images/fish.jpeg');  /* Add the path to your fish image */
+    background-size: contain;
+    background-repeat: no-repeat;
+    animation: swim 7s linear infinite;  /* Animation for fish movement */
+}
+
+@keyframes swim {
+    0% {
+        left: 0px;  /* Start the fish off-screen to the left */
+        top: 0;
+    }
+    25% {
+        right: 0%;  /* Fish swims to the center of the page */
+        top: 50%;
+        /* transform: translateY(50%); Center the fish horizontally */
+    }
+    50% {
+        right: 0%;  /* Fish swims to the center of the page */
+        top: 100%;
+        /* transform: translateX(-50%); Center the fish horizontally */
+    }
+    75% {
+        right: 0%;  /* Fish swims to the center of the page */
+        top: 50%;
+        /* transform: translateX(-50%); Center the fish horizontally */
+    }
+    100% {
+        left: 0%;  /* Move the fish off-screen to the right */
+        top: 0;
+    }
+}
+.contact-details{
+    position: relative;
+    background-image: linear-gradient(rgb(241, 236, 236), rgba(88, 48, 48, 0.555)), url("/static/images/image.png");
+    background-size: cover;
+    background-position: center center;
+    height: 700px;
+}
+

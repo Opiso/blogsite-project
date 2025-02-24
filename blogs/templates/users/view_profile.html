@@ -1,0 +1,20 @@
+{% extends 'partials/base.html' %}
+{% block title %}View Profile{% endblock %}
+{% load crispy_forms_tags %}
+{% block content %}
+
+{% if profile %}
+    {% if profile.profile_picture %}
+        <img src="{{ profile.profile_picture.url }}" alt="Profile Image">
+    {% else %}
+        <img src="{{MEDIA_URL}}login-icon.jpg" alt="">
+    {% endif %}
+    <p>Name: {{profile.full_name}} </p>
+    <p>Email: {{profile.email}} </p>
+    <p>Phone Number: profile.contact </p>
+{% else %}
+    <p>No profile found. Please <a href="{% url 'create_profile' %}"></a></p>
+{% endif %}
+
+{% include 'partials/footer.html' %} 
+{% endblock %}

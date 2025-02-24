@@ -1,0 +1,78 @@
+{% extends 'partials/base.html' %}
+{% block title %} Contact Us {% endblock %}
+{% load crispy_forms_tags %}
+{% block content %}
+
+<style>
+    h4{
+        color: blue;
+        font-size: larger;
+    }
+</style>
+{% load static %}
+{% if messages %}
+    <div class="alert-container">
+        {% for message in messages %}
+            <div class="alert alert-success">{{ message }}</div>
+        {% endfor %}
+    </div>
+{% endif %}
+
+<div class="row mt-2">
+    <div class="col-md-5">
+        <div class="card ms-1 contact-details">
+            <div class="card-body ms-3 fw-bold fs-4 contacts">
+                <h4 class="mt-2">Call Us: </h4>
+                 +254706641957<br> <br>
+
+                <h4>Mail Us: </h4>
+                capisokoth@gmail.com <br> <br>
+
+                <h4>Follow Us: </h4>
+                <a href="#" class="fa fa-facebook"></a>
+                <a href="#" class="fa fa-whatsapp"></a>
+                <a href="#" class="fa fa-instagram"></a>
+                <a href="#" class="fa fa-twitter"></a>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-7 contact-form">
+        <div class="card form-fields">
+            <div class="card-body">
+                <h3 class="text-primary">Feel free to contact Us if you have any Questions</h3>
+                <form action="" method="POST">
+                    {% csrf_token %}
+                    {{contact_form|crispy}}
+                    <input class="btn btn-success w-100" type="submit" value="Send">
+                </form>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<script>
+    // JavaScript to move the background image smoothly
+    let offsetX = 0;
+    let offsetY = 0;
+
+    function animateBackground() {
+      // Increment the offsets to make the background "dance"
+      offsetX += 0.3; // Adjust this value for faster or slower movement
+      offsetY += 0.3; // Adjust this value for different vertical movement
+
+      // Apply the new background position to the container
+      document.querySelector('.contact-details').style.backgroundPosition = `${offsetX}% ${offsetY}%`;
+
+      // Loop the animation smoothly
+      requestAnimationFrame(animateBackground);
+    }
+
+    // Start the animation
+    animateBackground();
+
+  </script>
+</body>
+</html>
+{% include 'partials/footer.html' %}
+{% endblock %}

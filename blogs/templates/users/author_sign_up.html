@@ -1,0 +1,26 @@
+{% extends 'partials/base.html' %}
+{% block title %}Sign Up{% endblock %}
+{% load crispy_forms_tags %}
+{% block content %}
+<div class="container" style="background-color: #5a5f64; border-radius: 1% 1% 0 0;">
+    <div class="row mt-2 pt-2" >
+        <div class="col-md-5 offset-md-3 mt-3 mb-3 pt-0" style=" background: linear-gradient(to right, wheat, #1565c0); border-radius: 5%;" >
+            <div class="card shadow my-3" style=" background: linear-gradient(to right, white, rgb(250, 174, 174))" >
+                <div class="card-body">
+                    <h2>Sign Up Here</h2>
+                    <form action="" method="POST" enctype="multipart/form-data">
+                        {% csrf_token %}
+                        {{ userForm|crispy }}
+                        {{ authorForm|crispy }}
+                        <input class="btn btn-success w-100" type="submit" value="Sign Up">
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-7">
+        </div>
+    </div>
+</div>
+
+{% include 'partials/footer.html' %} 
+{% endblock %}

@@ -1,0 +1,130 @@
+{% extends 'partials/base.html' %}
+{% block title %}Home{% endblock %}
+{% load crispy_forms_tags %}
+{% block content %}
+{% load static %}
+<div class="row">
+<div class="col-md-1 bg-dark text-white sideframe">
+    <div class="fish">
+    </div>
+</div>
+<div class="container col-md-10 my-1">
+    <div class="row pt-2 mb-lg-0 bg-success">
+        <div class="row">
+            <div class="col-md-4"></div>
+            <div class="col-md-8">
+                {% if messages %}
+                {% for message in messages %}
+                <div class="alertt {{ message.tags }} text-danger text-center" style="font-size: larger; font-weight: bold; font-style: italic;">{{ message }}</div>
+                {% endfor %}
+                {% endif %}
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card shadow my-3">
+                <div class="card-body">
+                    <form action="" method="POST" enctype="multipart/form-data">
+                        <h4>What do you want to post?</h4>
+                        {% csrf_token %}
+                        {{form|crispy}}
+                        <input class="btn btn-success w-100" type="submit" value="POST">
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-8">
+            {% for post in posts %}
+            <div class="card shadow my-3">
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-3">
+                            {% if post.picture %}
+                                <img src="{{ post.picture.url }}" alt="img" style="width: 150px; height: 150px; object-fit: cover;">
+                           {% else %}
+                                <img src="{{MEDIA_URL}}image.png" alt="{{post.author}}" style="width: 150px; height: 150px; object-fit: cover;">
+                            {% endif %}
+                        
+                        </div>
+                        <div class="col-md-9">
+                            <small>{{ post.date_created }}</small>
+                            <hr>
+                            {% if post.topic%}
+                            <p class="h3 text-success" style="text-decoration: none;">{{ post.topic }}</p>
+                            {% endif %}
+                            <p class="h5 subject" style="text-decoration: none;" href="">Subject: {{ post.title }}</p>
+                             <p id="">
+                                {% if post.content|length > 30 %}
+                                <span class="text-justify my-3" id="preview-content-{{post.id}}">{{ post.content|slice:":30" }}...
+                                <a class="text-justify see-more" id="see-more" href="#" data-post-id="{{post.id}}">See More <br> <br></a></span>
+                                <span id="full-content-{{post.id}}" class="full-content" style="display: none;">{{ post.content }} <br> <br> </span>
+                                {% else %}
+                                <span class="text-justify my-3">{{ post.content }}</span>
+                             </p>
+                             {% endif %}
+                             <small class="ms-3">~by <a class="username" href="{% url 'users-author_info' username=post.author.username %}" >{{ post.author.username }}</a></small> <hr>
+                             <form action="" method="post">
+                                {% csrf_token %}
+                                {{ comment_form|crispy }}
+                                <input class="btn btn-success w-50" type="submit" value="POST">
+                             </form><hr>
+                             {% if post.date_updated != post.date_created %}
+                             <small>Updated on: {{ post.date_updated }}</small>
+                             {% endif %}
+                             <div>
+                                {% if post.author == request.user %}
+                                <a href="{% url 'blog-update' id=post.id %}" class="btn btn-outline-success my-3 me-3" type="button">Update Post</a>
+                                <a href="{% url 'blog-delete' id=post.id %}" class="btn btn-outline-danger" type="button">Delete Post</a>
+                                {% endif %}
+                             </div>
+                        </div>
+                    </div>
+                </div> 
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+<div class="col-md-1 bg-dark text-white sideframe">
+    <div class="fish">
+    </div>
+</div>
+</div>
+<!-- <script>
+    function showFullContent() {
+        var fullContent = document.getElementById("full-content")
+        var seeMoreLink = document.getElementById("see-more")
+        var previewContent = document.getElementById("preview-content")
+
+        fullContent.style.display = 'inline';
+        seeMoreLink.style.display = 'none';
+        previewContent.style.display = 'none';
+    }
+</script> -->
+<script>
+    // Function to show the full content when "See more" is clicked
+    document.addEventListener('DOMContentLoaded', function () {
+      const seeMoreLinks = document.querySelectorAll('.see-more');
+  
+      seeMoreLinks.forEach(link => {
+        link.addEventListener('click', function (e) {
+          e.preventDefault();
+          
+          // Get the specific post ID from the data attribute
+          const postId = link.getAttribute('data-post-id');
+  
+          // Show the full content and hide the "See more" link
+          const fullContent = document.getElementById('full-content-' + postId);
+          const previewContent = document.getElementById('preview-content-' + postId);
+          
+          fullContent.style.display = 'inline'; // Show full content
+          previewContent.style.display = 'none'; // Hide the preview content
+          previewContent.style.display = 'none';
+
+
+        });
+      });
+    });
+  </script>
+{% include 'partials/footer.html' %} 
+
+{% endblock %}

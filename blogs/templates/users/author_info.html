@@ -1,0 +1,32 @@
+{% extends 'partials/base.html' %}
+{% block title %}Sign Up{% endblock %}
+{% load crispy_forms_tags %}
+{% block content %}
+{% load static %}
+<div class="bg-dark">
+<div class="container my-1 bg-success"> 
+    <div class="row mt-1 pt-1">
+        <div class="col-md-8 offset-md-2 mt-1 pt-1">
+            <div class="card shadow my-3">
+                <div class="card-body">
+                    <h2 style="display: inline;">You are viewing <span style="text-transform: capitalize;">{{ user.username }}</span>'s Profile</h2><br>
+                    {% if profile.profile_picture %}
+                    <img src="{{profile.profile_picture.url}}" alt="" style="width: 150px; height: 150px; object-fit: cover;"><hr>
+                    {% endif %}
+                    <div class="alert bg-dark text-white">
+                        {% if profile.brief_description %}
+                        <p class="fs-4">{{ profile.brief_description }}.</p>
+                        {% endif %}
+                        <p class="fs-5"> {% if profile.user.email %} Feel free to contact me via <a href="">
+                             {{profile.user.email}} {% endif %}</a> {% if request.user.author.phone_number %} or call or Whatsapp the Number - {{profile.phone_number}} {% endif %}
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+
+{% include 'partials/footer.html' %} 
+{% endblock %}

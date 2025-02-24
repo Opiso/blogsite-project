@@ -1,0 +1,41 @@
+{% extends 'partials/base.html' %}
+{% block title %}Edit Profile{% endblock %}
+{% load crispy_forms_tags %}
+{% block content %}
+
+{% load static %}
+<div class="row">
+    <div class="col-md-1 bg-dark sideframe">
+        <div class="fish">
+
+        </div>
+</div>
+    <div class="container bg-success my-1 col-md-10">
+        <div class="card shadow m-4">
+            <div class="card-body">
+                {% if messages %}
+                    {% for message in messages %}
+                        <div class="alertt {{ message.tags }} text-danger text-center" style="font-size: larger; font-weight: bold; font-style: italic;">
+                            {{ message }}
+                        </div>
+                    {% endfor %}
+                {% endif %}
+                <h2>Edit your profile</h2>
+                <form action="" method="POST" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    {{ userform|crispy }}
+                    {{ authorform|crispy }}
+                    <input class="btn btn-success w-100 text-center" type="submit" value="Update">
+                    <hr>
+                </form>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-1 bg-dark sideframe">
+        <div class="fish">
+
+        </div>    </div>
+</div>
+
+{% include 'partials/footer.html' %} 
+{% endblock %}

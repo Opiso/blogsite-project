@@ -1,0 +1,26 @@
+{% extends 'partials/base.html' %}
+{% block title %} About{% endblock %}
+{% load crispy_forms_tags %}
+{% block content %}
+
+{% load static %}
+{% if messages %}
+    <div class="alert-container">
+        {% for message in messages %}
+            <div class="alert alert-success">{{ message }}</div>
+        {% endfor %}
+    </div>
+{% endif %}
+<p class="mt-5"><h1 style="color:rgb(255, 0, 170)">And the about Us Page is Here</h1></p>
+
+<img src="{% static 'images/website-blog.jpg' %}" alt="image">
+
+<p>Welcome, {{ request.user.first_name }} {{ request.user.last_name }}</p>
+{% if request.user.author.profile_picture %}
+   <p class="bg-light"> Profile Picture: <img class="bg-success" src="{{ request.user.author.profile_picture.url }}" alt="Profile Picture" style="width: 150px; height: 150px; object-fit: cover;"></p>
+{% else %}
+    <p>No pp</p>
+{% endif %}
+
+{% include 'partials/footer.html' %} 
+{% endblock %}
