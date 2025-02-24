@@ -1,0 +1,42 @@
+{% extends 'partials/base.html' %}
+{% block title %} About{% endblock %}
+{% load crispy_forms_tags %}
+{% block content %}
+
+{% load static %}
+{% if messages %}
+    <div class="alert-container">
+        {% for message in messages %}
+            <div class="alert alert-success">{{ message }}</div>
+        {% endfor %}
+    </div>
+{% endif %}
+<div class="container">
+    <div class="col-md-6 offset-md-3 my-2" style="box-shadow: 0 -1px 7px rgba(22, 22, 18, 0.842);">
+        <div class="card">
+            <div class="card-body">
+                <h1>{{ post.title }}</h1>
+                {% if post.picture %}
+                <img src="{{ post.picture.url }}" alt="img" style="width: 50px; height: 50px; object-fit: cover;">
+                {% endif %}
+                <p>{{ post.content }}</p> <hr> <br>
+                <h2>Comments</h2>
+                {% for comment in comments %}
+                    <p><strong>{{ comment.user.username }}:</strong> {{ comment.content }}</p>
+                {% empty %}
+                    <p>No comments yet. Be the first to comment!</p>
+                {% endfor %}
+
+                <h3>Want to Leave a Comment?</h3>
+                <form method="post">
+                    {% csrf_token %}
+                    {{ comment_form|crispy }}
+                    <input type="hidden" name="post_id" value="{{ post.id }}">
+                    <button class="btn btn-success w-100" type="submit">Submit Comment</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% include 'partials/footer.html' %}
+{% endblock %}

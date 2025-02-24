@@ -14,11 +14,12 @@ from django.contrib.auth.decorators import login_required
 
 def index(request):
     posts = PostModel.objects.all()
-    if request.method == 'POST':
+    # post_form = PostModelForm()
+    comment_form = CommentForm()
+    if request.method == 'POST' and 'post_form' in request.POST:
         form =  PostModelForm(request.POST, request.FILES)
         if form.is_valid():
             instance = form.save(commit=False)
-            # instance.user = request.user
             if request.user.is_authenticated:
                 instance.author = request.user
             else:
@@ -36,15 +37,19 @@ def index(request):
             form = PostModelForm()
 
                 # Handle the comment submission
-    if request.method == 'POST':
+    if request.method == 'POST' and  'comment_form' in request.POST:
+        post_id = request.POST.get('post_id')  # Get the post_id where comment is being submitted
+        post = PostModel.objects.get(id=post_id)  # Fetch the post object
         comment_form = CommentForm(request.POST)
+
         if comment_form.is_valid():
             # Create a comment object and associate it with the current post and user
             comment = comment_form.save(commit=False)
-            # comment.post = post
-            comment.user = request.user  # Assuming the user is logged in
+            comment.post = post
+            # comment.user = request.user  # Assuming the user is logged in
             comment.save()
-            return redirect('blog-index')  # Redirect to the same post detail page
+            messages.success(request, "Your comment has been posted.")
+            return redirect('post-detail', post_id=post.id)  # Redirect to the post detail page
 
     else:
         comment_form = CommentForm()
@@ -58,6 +63,29 @@ def index(request):
         }
 
     return render(request, 'blog/index.html', context)
+
+def post_detail(request, id):
+    post = PostModel.objects.get(id=id)
+    comments = post.comments.all()  # Get all comments related to this post
+    
+    if request.method == 'POST':
+        comment_form = CommentForm(request.POST)
+        if comment_form.is_valid():
+            comment = comment_form.save(commit=False)
+            comment.post = post
+            # comment.user = request.user
+            comment.save()
+            return redirect('post-detail', id=post.id)  # Reload the post with new comment
+    else:
+        comment_form = CommentForm()
+
+    context = {
+        'post': post,
+        'comments': comments,
+        'comment_form': comment_form,
+    }
+
+    return render(request, 'blog/post_detail.html', context)
 
 def blog_post_list(request):
     form = SearchForm(request.GET)
@@ -133,3 +161,20 @@ def contact(request):
         'contact_form':contact_form
     }
     return render(request, 'blog/contact.html', instance)
+
+# Post Detail View
+# def post_detail(request, post_id):
+#     post = Post.objects.get(id=post_id)
+#     comments = post.comments.all()  # Fetch all comments related to the post
+
+#     # Handling the form submission for new comments
+#     if request.method == "POST":
+#         author_name = request.POST['author_name']
+#         content = request.POST['content']
+#         comment = Comment(post=post, author_name=author_name, content=content)
+#         comment.save()  # Save the new comment
+
+#         # Redirect back to the same post detail page after submitting a comment
+#         return HttpResponseRedirect(f"/post/{post_id}/")
+
+#     return render(request, 'post_detail.html', {'post': post, 'comments': comments})

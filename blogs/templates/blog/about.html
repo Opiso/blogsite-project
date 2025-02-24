@@ -11,16 +11,22 @@
         {% endfor %}
     </div>
 {% endif %}
-<p class="mt-5"><h1 style="color:rgb(255, 0, 170)">And the about Us Page is Here</h1></p>
+<div class="container mb-lg-3">
+    <div>
+       <h1 class="mt-5" style="color:rgb(255, 0, 170)">And the about Us Page is Here</h1>
 
-<img src="{% static 'images/website-blog.jpg' %}" alt="image">
+        <p class="fs-3">About Us Coming Soon......</p><hr><br>
+        <img src="{% static 'images/website-blog.jpg' %}" alt="image">
 
-<p>Welcome, {{ request.user.first_name }} {{ request.user.last_name }}</p>
-{% if request.user.author.profile_picture %}
-   <p class="bg-light"> Profile Picture: <img class="bg-success" src="{{ request.user.author.profile_picture.url }}" alt="Profile Picture" style="width: 150px; height: 150px; object-fit: cover;"></p>
-{% else %}
-    <p>No pp</p>
-{% endif %}
-
+        {% if request.user.is_authenticated %}
+        <p>Welcome, {{ request.user.first_name }} {{ request.user.last_name }}</p>
+        {% if request.user.author.profile_picture %}
+        <p class="bg-light"> Profile Picture: <img class="bg-success" src="{{ request.user.author.profile_picture.url }}" alt="Profile Picture" style="width: 150px; height: 150px; object-fit: cover;"></p>
+        {% else %}
+            <p>No pp</p>
+        {% endif %}
+        {% endif %}
+    </div>
+</div>
 {% include 'partials/footer.html' %} 
 {% endblock %}

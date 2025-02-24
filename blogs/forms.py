@@ -1,5 +1,5 @@
 from django import forms
-from .models import PostModel
+from .models import PostModel, Comment
 from crispy_forms.layout import Layout, Field, Row, Column
 
 
@@ -26,7 +26,7 @@ class PostModelForm(forms.ModelForm):
 
 
 class CommentForm(forms.ModelForm):
-    comment_on_the_post = forms.CharField(required=False, widget = forms.Textarea(attrs={'class': 'custom-textarea', 'rows': 2, 'placeholder': 'Post your comment'}))    
+    comment_on_the_post = forms.CharField(required=False, widget = forms.Textarea(attrs={'class': 'custom-textarea', 'rows': 2, 'placeholder': 'Write your comment'}))    
     class Meta:
         model = PostModel
         fields = ('comment_on_the_post',)
@@ -34,7 +34,7 @@ class CommentForm(forms.ModelForm):
 class ContactForm(forms.ModelForm):
     message = forms.CharField(required=False, widget = forms.Textarea(attrs={'class': 'custom-textarea', 'rows': 2, 'placeholder': 'Write your Message'}))    
     class Meta:
-        model = PostModel
+        model = Comment
         fields = ('your_name', 'your_email', 'subject', 'message')
 
 class SearchForm(forms.ModelForm):

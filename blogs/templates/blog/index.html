@@ -62,11 +62,7 @@
                              </p>
                              {% endif %}
                              <small class="ms-3">~by <a class="username" href="{% url 'users-author_info' username=post.author.username %}" >{{ post.author.username }}</a></small> <hr>
-                             <form action="" method="post">
-                                {% csrf_token %}
-                                {{ comment_form|crispy }}
-                                <input class="btn btn-success w-50" type="submit" value="POST">
-                             </form><hr>
+                             <p>Want to comment of this Post? <a class="comments" href="{% url 'post-detail' id=post.id %}">Comments</a></p>
                              {% if post.date_updated != post.date_created %}
                              <small>Updated on: {{ post.date_updated }}</small>
                              {% endif %}

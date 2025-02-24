@@ -203,3 +203,6 @@ div .cancel_btn:hover{
     height: 700px;
 }
 
+.comments{
+    text-decoration: none;
+}

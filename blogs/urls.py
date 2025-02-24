@@ -26,5 +26,7 @@ urlpatterns = [
     path('contact/', views.contact, name='blog-contact'),
     path('delete/<int:id>/', views.delete_blog_post, name='blog-delete'),
     path('update/<int:id>/', views.update_blog_post, name='blog-update'),
+    path('post/<int:id>/', views.post_detail, name='post-detail'),
+
 ]
 
