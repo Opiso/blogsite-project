@@ -109,7 +109,7 @@ div .cancel_btn:hover{
 
 .see-more:hover {
     color: blueviolet;
-    text-decoration: underline;
+    border-bottom: 1px solid blueviolet;
     transition: 0.2s ease;
 
 }
@@ -205,4 +205,9 @@ div .cancel_btn:hover{
 
 .comments{
     text-decoration: none;
+}
+.comments:hover{
+    color: blueviolet;
+    border-bottom: 1px solid blueviolet;
+    transition: 0.5s ease;
 }
