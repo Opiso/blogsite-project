@@ -39,9 +39,13 @@
                     <div class="row">
                         <div class="col-md-3">
                             {% if post.picture %}
-                                <img src="{{ post.picture.url }}" alt="img" style="width: 150px; height: 150px; object-fit: cover;">
+                                <img class="blog-image" src="{{ post.picture.url }}" alt="img" style="width: 150px; height: 150px; object-fit: cover;">
                            {% else %}
-                                <img src="{{MEDIA_URL}}image.png" alt="{{post.author}}" style="width: 150px; height: 150px; object-fit: cover;">
+                           <div>
+                                <p class="bg-light blog-image fs-4 text-success" style="display:flex; align-items: center; justify-content: center; width: 150px; height: 150px; object-fit: cover;">No Image</p>
+                            </div>
+                            <!-- <img class="blog-image" src="{{MEDIA_URL}}image.png" alt="{{post.author}}" style="width: 150px; height: 150px; object-fit: cover;"> -->
+
                             {% endif %}
                         
                         </div>
@@ -85,17 +89,7 @@
     </div>
 </div>
 </div>
-<!-- <script>
-    function showFullContent() {
-        var fullContent = document.getElementById("full-content")
-        var seeMoreLink = document.getElementById("see-more")
-        var previewContent = document.getElementById("preview-content")
 
-        fullContent.style.display = 'inline';
-        seeMoreLink.style.display = 'none';
-        previewContent.style.display = 'none';
-    }
-</script> -->
 <script>
     // Function to show the full content when "See more" is clicked
     document.addEventListener('DOMContentLoaded', function () {
@@ -120,6 +114,61 @@
         });
       });
     });
+
+    // JavaScript to move the images smoothly
+    let offsetX = 0;
+    let offsetY = 0;
+    let speedX = 0.01;  // Horizontal speed
+    let speedY = 0.05;  // Vertical speed
+    let maxOffsetX = 17; // Maximum horizontal offset (in percentage)
+    let maxOffsetY = 80; // Maximum vertical offset (in percentage)
+    let minOffsetX = 0;  // Minimum horizontal offset
+    let minOffsetY = 0;  // Minimum vertical offset
+
+    // Track the offsets for each image
+    let offsets = [];
+
+    // Initialize offsets for each image
+    function initializeOffsets() {
+    const images = document.querySelectorAll('.blog-image');
+    images.forEach((image, index) => {
+        offsets.push({
+        offsetX: 0,
+        offsetY: 0,
+        speedX: speedX + Math.random() * 0.01,  // Slightly random speed for each image
+        speedY: speedY + Math.random() * 0.07,  // Slightly random speed for each image
+        });
+    });
+    }
+
+    function animateImage() {
+        const images = document.querySelectorAll('.blog-image');
+        images.forEach((image, index) => {
+            const offset = offsets[index];
+
+            // Increment the offsets to make the background "dance"
+            offset.offsetX += offset.speedX; // Adjust this value for faster or slower movement
+            offset.offsetY += offset.speedY; // Adjust this value for different vertical movement
+
+        // Reverse direction when hitting the screen edges (bounce effect)
+    if (offset.offsetX >= maxOffsetX || offset.offsetX <= minOffsetX) {
+        offset.speedX = -offset.speedX; // Change direction when hitting the edges
+    }
+    if (offset.offsetY >= maxOffsetY || offset.offsetY <= minOffsetY) {
+        offset.speedY = -offset.speedY; // Change direction when hitting the edges
+    }
+      // Apply the new image position to the container
+      image.style.transform = `translate(${offset.offsetX}%, ${offset.offsetY}%)`;
+        });
+      // Loop the animation smoothly
+      requestAnimationFrame(animateImage);
+    }
+
+// Initialize offsets when the page loads
+window.onload = () => {
+  initializeOffsets();
+  animateImage();
+}
   </script>
 {% include 'partials/footer.html' %} 
 
