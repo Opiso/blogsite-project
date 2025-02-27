@@ -1,5 +1,5 @@
 from django import forms
-from .models import PostModel, Comment
+from .models import PostModel, Comment, Contacts
 from crispy_forms.layout import Layout, Field, Row, Column
 
 
@@ -26,16 +26,20 @@ class PostModelForm(forms.ModelForm):
 
 
 class CommentForm(forms.ModelForm):
-    comment_on_the_post = forms.CharField(required=False, widget = forms.Textarea(attrs={'class': 'custom-textarea', 'rows': 2, 'placeholder': 'Write your comment'}))    
+    your_name = forms.CharField(max_length=100, widget=forms.TextInput(attrs={'class': 'custom-class', 'placeholder': 'Enter your name'}))
+    comment_on_the_post = forms.CharField(required=True, widget = forms.Textarea(attrs={'class': 'custom-textarea', 'rows': 2, 'placeholder': 'Write your comment'}))    
     class Meta:
-        model = PostModel
-        fields = ('comment_on_the_post',)
+        model = Comment
+        fields = ('your_name','comment_on_the_post' )
 
 class ContactForm(forms.ModelForm):
     message = forms.CharField(required=False, widget = forms.Textarea(attrs={'class': 'custom-textarea', 'rows': 2, 'placeholder': 'Write your Message'}))    
     class Meta:
-        model = Comment
+        model = Contacts
         fields = ('your_name', 'your_email', 'subject', 'message')
 
 class SearchForm(forms.ModelForm):
-    query = forms.CharField(label='Search', max_length=100)
+    query = forms.CharField(max_length=100, required=False, label='Search')
+    topic = forms.CharField(max_length=100, required=False, label='Topic')
+    author = forms.CharField(max_length=100, required=False, label='Author')
+    title = forms.CharField(max_length=100, required=False, label='Title')

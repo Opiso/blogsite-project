@@ -1,0 +1,171 @@
+{% extends 'partials/base.html' %}
+{% block title %}Home{% endblock %}
+{% load crispy_forms_tags %}
+{% block content %}
+{% load static %}
+<div class="row">
+<div class="col-md-1 bg-dark text-white sideframe">
+    <div class="fish">
+    </div>
+</div>
+<div class="container col-md-10 my-1">
+    <div class="row pt-2 mb-lg-0 bg-success">
+        <div class="row">
+            <div class="col-md-4"></div>
+            <div class="col-md-8">
+                {% if messages %}
+                {% for message in messages %}
+                <div class="alert {{ message.tags }} text-center {% if message.tags == 'success' %} alert-success text-success {% elif message.tags == 'error' %} alert.error text-danger {% endif %}" 
+                    style="font-size: larger; font-weight: bold; font-style: italic; line-height: 3px;">{{ message }}
+                </div>
+                {% endfor %}
+                {% endif %}
+            </div>
+        </div>
+        <div class="col-md-4">
+
+        </div>
+        <div class="col-md-8">
+            {% if products %}
+            {% for product in products %}
+            <div class="card shadow my-3">
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-3">
+                            {% if product.picture %}
+                                <img class="blog-image" src="{{ post.picture.url }}" alt="img" style="width: 150px; height: 150px; object-fit: cover;">
+                           {% else %}
+                           <div>
+                                <p class="bg-light blog-image fs-4 text-success" style="display:flex; align-items: center; justify-content: center; width: 150px; height: 150px; object-fit: cover;">No Image</p>
+                            </div>
+                            <!-- <img class="blog-image" src="{{MEDIA_URL}}image.png" alt="{{post.author}}" style="width: 150px; height: 150px; object-fit: cover;"> -->
+
+                            {% endif %}
+                        
+                        </div>
+                        <div class="col-md-9">
+                            <small>{{ product.date_created }}</small>
+                            <hr>
+                            {% if product.topic%}
+                            <p class="h3 text-success" style="text-decoration: none;">{{ product.topic }}</p>
+                            {% endif %}
+                            <p class="h5 subject" style="text-decoration: none;" href="">Subject: {{ product.title }}</p>
+                             <p id="">
+                                {% if product.content|length > 30 %}
+                                <span class="text-justify my-3" id="preview-content-{{post.id}}">{{ product.content|slice:":30" }}...
+                                <a class="text-justify see-more" id="see-more" href="#" data-post-id="{{post.id}}">See More <br> <br></a></span>
+                                <span id="full-content-{{post.id}}" class="full-content" style="display: none;">{{ product.content }} <br> <br> </span>
+                                {% else %}
+                                <span class="text-justify my-3">{{ product.content }}</span>
+                             </p>
+                             {% endif %}
+                             <small class="ms-3">~by <a class="username" href="{% url 'users-author_info' username=product.author.username %}" >{{ product.author.username }}</a></small> <hr>
+                             <p>Want to comment on this Post? <a class="comments" href="{% url 'post-detail' id=product.id %}">Comments</a></p>
+                             {% if product.date_updated != product.date_created %}
+                             <small>Updated on: {{ product.date_updated }}</small>
+                             {% endif %}
+                             <div>
+                                {% if product.author == request.user %}
+                                <a href="{% url 'blog-update' id=product.id %}" class="btn btn-outline-success my-3 me-3" type="button">Update Post</a>
+                                <a href="{% url 'blog-delete' id=product.id %}" class="btn btn-outline-danger" type="button">Delete Post</a>
+                                {% endif %}
+                             </div>
+                        </div>
+                    </div>
+                </div> 
+            </div>
+            {% endfor %}
+            {% endif %}
+        </div>
+    </div>
+</div>
+<div class="col-md-1 bg-dark text-white sideframe">
+    <div class="fish">
+    </div>
+</div>
+</div>
+
+<script>
+    // Function to show the full content when "See more" is clicked
+    document.addEventListener('DOMContentLoaded', function () {
+      const seeMoreLinks = document.querySelectorAll('.see-more');
+  
+      seeMoreLinks.forEach(link => {
+        link.addEventListener('click', function (e) {
+          e.preventDefault();
+          
+          // Get the specific post ID from the data attribute
+          const postId = link.getAttribute('data-post-id');
+  
+          // Show the full content and hide the "See more" link
+          const fullContent = document.getElementById('full-content-' + postId);
+          const previewContent = document.getElementById('preview-content-' + postId);
+          
+          fullContent.style.display = 'inline'; // Show full content
+          previewContent.style.display = 'none'; // Hide the preview content
+          previewContent.style.display = 'none';
+
+
+        });
+      });
+    });
+function animate(){
+    // JavaScript to move the images smoothly
+    let offsetX = 0;
+    let offsetY = 0;
+    let speedX = 0.01;  // Horizontal speed
+    let speedY = 0.05;  // Vertical speed
+    let maxOffsetX = 17; // Maximum horizontal offset (in percentage)
+    let maxOffsetY = 80; // Maximum vertical offset (in percentage)
+    let minOffsetX = 0;  // Minimum horizontal offset
+    let minOffsetY = 0;  // Minimum vertical offset
+
+    // Track the offsets for each image
+    let offsets = [];
+
+    // Initialize offsets for each image
+    function initializeOffsets() {
+    const images = document.querySelectorAll('.blog-image');
+    images.forEach((image, index) => {
+        offsets.push({
+        offsetX: 0,
+        offsetY: 0,
+        speedX: speedX + Math.random() * 0.01,  // Slightly random speed for each image
+        speedY: speedY + Math.random() * 0.07,  // Slightly random speed for each image
+        });
+    });
+    }
+
+    function animateImage() {
+        const images = document.querySelectorAll('.blog-image');
+        images.forEach((image, index) => {
+            const offset = offsets[index];
+
+            // Increment the offsets to make the background "dance"
+            offset.offsetX += offset.speedX; // Adjust this value for faster or slower movement
+            offset.offsetY += offset.speedY; // Adjust this value for different vertical movement
+
+        // Reverse direction when hitting the screen edges (bounce effect)
+    if (offset.offsetX >= maxOffsetX || offset.offsetX <= minOffsetX) {
+        offset.speedX = -offset.speedX; // Change direction when hitting the edges
+    }
+    if (offset.offsetY >= maxOffsetY || offset.offsetY <= minOffsetY) {
+        offset.speedY = -offset.speedY; // Change direction when hitting the edges
+    }
+      // Apply the new image position to the container
+      image.style.transform = `translate(${offset.offsetX}%, ${offset.offsetY}%)`;
+        });
+      // Loop the animation smoothly
+      requestAnimationFrame(animateImage);
+    }
+
+// Initialize offsets when the page loads
+window.onload = () => {
+  initializeOffsets();
+  animateImage();
+}
+}
+  </script>
+{% include 'partials/footer.html' %} 
+
+{% endblock %}

@@ -68,13 +68,16 @@
           </ul>
         </div>      
         <div class="d-flex row row2">
-            <form class="d-flex me-3" role="search">
+            <form class="d-flex me-3" role="search" method="get" action="{% url 'blog-search' %}">
                 <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
                 <button class="btn btn-outline-success search" type="submit">Search</button>
             </form>
         </div>
       </div>
     </div>
+    <div class="hamburger" id="hamburger-menu">
+      <i class="fas fa-bars"></i> <!-- Hamburger Icon from FontAwesome -->
+  </div>
   </nav>
 
   <script>

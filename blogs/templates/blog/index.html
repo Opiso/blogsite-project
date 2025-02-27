@@ -15,7 +15,9 @@
             <div class="col-md-8">
                 {% if messages %}
                 {% for message in messages %}
-                <div class="alertt {{ message.tags }} text-danger text-center" style="font-size: larger; font-weight: bold; font-style: italic;">{{ message }}</div>
+                <div class="alert {{ message.tags }} text-center {% if message.tags == 'success' %} alert-success text-success {% elif message.tags == 'error' %} alert.error text-danger {% endif %}" 
+                    style="font-size: larger; font-weight: bold; font-style: italic; line-height: 3px;">{{ message }}
+                </div>
                 {% endfor %}
                 {% endif %}
             </div>
@@ -66,7 +68,7 @@
                              </p>
                              {% endif %}
                              <small class="ms-3">~by <a class="username" href="{% url 'users-author_info' username=post.author.username %}" >{{ post.author.username }}</a></small> <hr>
-                             <p>Want to comment of this Post? <a class="comments" href="{% url 'post-detail' id=post.id %}">Comments</a></p>
+                             <p>Want to comment on this Post? <a class="comments" href="{% url 'post-detail' id=post.id %}">Comments</a></p>
                              {% if post.date_updated != post.date_created %}
                              <small>Updated on: {{ post.date_updated }}</small>
                              {% endif %}
@@ -114,7 +116,7 @@
         });
       });
     });
-
+function animate(){
     // JavaScript to move the images smoothly
     let offsetX = 0;
     let offsetY = 0;
@@ -168,6 +170,7 @@
 window.onload = () => {
   initializeOffsets();
   animateImage();
+}
 }
   </script>
 {% include 'partials/footer.html' %} 

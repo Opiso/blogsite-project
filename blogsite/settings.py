@@ -40,7 +40,14 @@ INSTALLED_APPS = [
     'blogs',
     'users',
     'crispy_forms',
-    "crispy_bootstrap5",
+    'crispy_bootstrap5',
+    'compressor',
+]
+
+STATICFILES_FINDERS = [
+    'django.contrib.staticfiles.finders.FileSystemFinder',
+    'django.contrib.staticfiles.finders.AppDirectoriesFinder',
+    'compressor.finders.CompressorFinder',
 ]
 
 MIDDLEWARE = [
@@ -66,7 +73,8 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
-                'django.template.context_processors.media',  # Add this line
+                'django.template.context_processors.media',  
+                # 'compressor.context_processors.compress',  
             ],
         },
     },
@@ -74,6 +82,7 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'blogsite.wsgi.application'
 
+COMPRESS_ENABLED = True
 
 # Database
 # https://docs.djangoproject.com/en/5.1/ref/settings/#databases
@@ -132,6 +141,9 @@ CRISPY_TEMPLATE_PACK = 'bootstrap5'
 LOGIN_REDIRECT_URL = 'blog-index'
 
 STATIC_URL = 'static/'
+STATICFILES_DIRS = [
+    BASE_DIR / 'static',  # Path to your static files
+]
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
 STATICFILES_DIRS = [

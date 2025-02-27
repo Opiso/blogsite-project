@@ -13,7 +13,7 @@
 {% if messages %}
     <div class="alert-container">
         {% for message in messages %}
-            <div class="alert alert-success">{{ message }}</div>
+            <div class="alert alert-success text-center" style="font-size: larger; font-weight: bold; font-style: italic;">{{ message }}</div>
         {% endfor %}
     </div>
 {% endif %}
@@ -44,7 +44,8 @@
                     {% csrf_token %}
                     {{contact_form|crispy}}
                     <input class="btn btn-success w-100" type="submit" value="Send">
-                </form>
+                </form> <br>
+                <p>Other Users said: <a class="feedbacks-link fs-4" href="{% url 'blog-feedback' %}">Users Feedbacks</a></p>
             </div>
         </div>
     </div>

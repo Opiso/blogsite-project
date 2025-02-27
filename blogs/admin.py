@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import PostModel, Comment
+from .models import PostModel, Comment, Contacts
 # Register your models here.
 
 class PostModelAdmin(admin.ModelAdmin):
@@ -11,3 +11,8 @@ class CommentAdmin(admin.ModelAdmin):
     list_display=('comment_on_the_post', 'your_name','date','subject','your_email','message')
 
 admin.site.register(Comment, CommentAdmin)
+
+class ContactAdmin(admin.ModelAdmin):
+    list_display=('your_name','date','subject','your_email','message')
+
+admin.site.register(Contacts, ContactAdmin)

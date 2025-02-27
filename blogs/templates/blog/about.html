@@ -6,26 +6,25 @@
 {% load static %}
 {% if messages %}
     <div class="alert-container">
+        {% if messages %}
         {% for message in messages %}
-            <div class="alert alert-success">{{ message }}</div>
+        <div class="alert {{ message.tags }} text-center {% if message.tags == 'success' %} alert-success text-success {% elif message.tags == 'error' %} alert.error text-danger {% endif %}" 
+            style="font-size: larger; font-weight: bold; font-style: italic; line-height: 3px;">{{ message }}
+        </div>
         {% endfor %}
+        {% endif %}
     </div>
 {% endif %}
-<div class="container mb-lg-3">
-    <div>
-       <h1 class="mt-5" style="color:rgb(255, 0, 170)">And the about Us Page is Here</h1>
+<div class="container mb-lg-5" style="border: 1px solid green;">
+    <div class="ms-3">
+       <h1 class="mt-2 text-success ms-5" style="text-decoration: underline;">About Us</h1>
+       
+       
+       <h4>Welcome, {% if request.user.is_authenticated %} {{ request.user.first_name }} {{ request.user.last_name }} {% endif %} </h4>
+       
+        <p class="fs-3">Information About Us Coming Soon......</p><hr><br>
+        <img class="about-image" src="{% static 'images/website-blog.jpg' %}" alt="image">
 
-        <p class="fs-3">About Us Coming Soon......</p><hr><br>
-        <img src="{% static 'images/website-blog.jpg' %}" alt="image">
-
-        {% if request.user.is_authenticated %}
-        <p>Welcome, {{ request.user.first_name }} {{ request.user.last_name }}</p>
-        {% if request.user.author.profile_picture %}
-        <p class="bg-light"> Profile Picture: <img class="bg-success" src="{{ request.user.author.profile_picture.url }}" alt="Profile Picture" style="width: 150px; height: 150px; object-fit: cover;"></p>
-        {% else %}
-            <p>No pp</p>
-        {% endif %}
-        {% endif %}
     </div>
 </div>
 {% include 'partials/footer.html' %} 

@@ -19,12 +19,6 @@
     color: white;
 
 }
-/* #linked ul li {
-    color: white;
-    padding-top: 0;
-    margin-top: 0;
-    text-decoration: none;
-} */
 .homie{
     color: rgb(5, 238, 238);
     text-decoration: underline;
@@ -162,36 +156,35 @@ div .cancel_btn:hover{
   }
   .fish {
     position: absolute;
-    width: 100px;  /* Adjust the size of the fish */
+    width: 114px;  
     height: 100vh;
-    background-image: url('/static/images/fish.jpeg');  /* Add the path to your fish image */
+    background-image: url('/static/images/fish.jpeg');  
     background-size: contain;
     background-repeat: no-repeat;
-    animation: swim 7s linear infinite;  /* Animation for fish movement */
+    animation: swim 7s linear infinite;  /* Animation for the movement */
 }
 
 @keyframes swim {
     0% {
-        left: 0px;  /* Start the fish off-screen to the left */
+        left: 0px;  
         top: 0;
     }
     25% {
-        right: 0%;  /* Fish swims to the center of the page */
+        right: 0%;  
         top: 50%;
-        /* transform: translateY(50%); Center the fish horizontally */
     }
     50% {
-        right: 0%;  /* Fish swims to the center of the page */
+        right: 0%;  
         top: 100%;
-        /* transform: translateX(-50%); Center the fish horizontally */
+        
     }
     75% {
-        right: 0%;  /* Fish swims to the center of the page */
+        right: 0%;  
         top: 50%;
-        /* transform: translateX(-50%); Center the fish horizontally */
+        
     }
     100% {
-        left: 0%;  /* Move the fish off-screen to the right */
+        left: 0%;  
         top: 0;
     }
 }
@@ -203,11 +196,129 @@ div .cancel_btn:hover{
     height: 700px;
 }
 
-.comments{
+.comments, .comment-delete, .feedbacks-link{
     text-decoration: none;
 }
-.comments:hover{
+.comments:hover, .comment-delete:hover, .feedbacks-link:hover{
     color: blueviolet;
     border-bottom: 1px solid blueviolet;
     transition: 0.5s ease;
 }
+.alert-errors{
+    color: red;
+    background-color: blue;
+}
+.blog-image {
+    transition: transform 0.5s ease; /* Smooth transition for scaling */
+}
+
+.blog-image:hover {
+    cursor: pointer;
+    transform: scale(1.2); /* Scale the image to 1.2 times its size */
+}
+.about-image{
+    transition: transform 2s ease-in;
+}
+.about-image:hover{
+    outline: 1px solid red;    
+            outline-offset: -5px;      
+            box-shadow:
+                0 0 0 5px green,      
+                0 0 0 10px blue,      
+                0 0 0 15px yellow,    
+                0 0 0 20px purple;     
+    cursor: pointer;
+    transform: scale(0.5);
+}
+.footer-nav p a{
+    color: hwb(211 4% 1%);
+    text-decoration: none;
+    font-weight: bold;
+    font-size: x-large;
+    align-items: center;
+    justify-content: center;
+}
+.footer-nav p a:hover{
+    color: rgb(235, 17, 17);
+    border-bottom: 1px solid rgb(255, 5, 5);
+    transition: 0.5s ease-in;
+}
+ul{
+    list-style-type: none;
+}
+.page-up-btn {
+    position: fixed;
+    display: none;
+    bottom: 20px;   
+    right: 20px;   
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 7px;
+    border-radius: 45%;
+    font-size: 20px;
+    cursor: pointer;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    border: 1px solid white;
+    animation: glide 1s ease-in-out infinite;
+}
+
+@keyframes glide {
+    0% {
+        transform: translateY(0);
+    }
+    
+    95% {
+        transform: translateY(-10px);
+        
+    }
+   
+    100% {
+        transform: translateY(0);
+    }
+}
+.page-up-btn:hover {
+    background-color: #0056b3;
+}
+        /* Basic styles for the navbar */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+
+        /* Hamburger menu */
+        .hamburger {
+            display: none;
+            font-size: 1.5em;
+            color: white;
+            cursor: pointer;
+        }
+
+        /* Media Query for smaller screens */
+        @media screen and (max-width: 768px) {
+            /* Hide the nav links and show the hamburger */
+            .navbar .nav-links {
+                display: none;
+                flex-direction: column;
+                width: 100%;
+                background-color: #333;
+                position: absolute;
+                top: 60px; /* Adjust according to your navbar height */
+                left: 0;
+                padding: 20px 0;
+            }
+
+            .navbar .nav-links.active {
+                display: flex; /* Show the menu when the active class is added */
+            }
+
+            .navbar .hamburger {
+                display: block; /* Show hamburger icon on small screens */
+            }
+
+            .navbar .nav-links li {
+                margin: 10px 0;
+                text-align: center;
+            }
+        }

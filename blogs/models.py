@@ -18,7 +18,7 @@ class PostModel(models.Model):
         return self.title 
 
 class Comment(models.Model):
-    blog = models.ForeignKey(PostModel, related_name='comments', on_delete=models.CASCADE)
+    blog = models.ForeignKey(PostModel, on_delete=models.CASCADE)
     comment_on_the_post = models.TextField(null=True, blank=True)
     your_name = models.CharField(max_length=30, null=True,blank=True)
     date = models.DateTimeField(auto_now_add=True)
@@ -31,3 +31,16 @@ class Comment(models.Model):
 
     def __str__(self):
         return self.your_name
+    
+class Contacts(models.Model):
+    your_name = models.CharField(max_length=30, null=True,blank=True)
+    date = models.DateTimeField(auto_now_add=True)
+    subject = models.CharField(max_length=30, null=True,blank=True)
+    your_email = models.EmailField(null=True, blank=True)
+    message = models.TextField(null=True, blank=True)
+    
+    class Meta:
+        ordering = ('-date',)
+
+    def __str__(self):
+        return f"Hey {self.your_name} your message of {self.subject} was well received"

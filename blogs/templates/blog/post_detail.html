@@ -1,5 +1,5 @@
 {% extends 'partials/base.html' %}
-{% block title %} About{% endblock %}
+{% block title %}Post details{% endblock %}
 {% load crispy_forms_tags %}
 {% block content %}
 
@@ -7,7 +7,9 @@
 {% if messages %}
     <div class="alert-container">
         {% for message in messages %}
-            <div class="alert alert-success">{{ message }}</div>
+            <div class="alert text-center {% if message.tags == 'success' %} alert-success text-success {% elif message.tags == 'error' %} alert-error text-danger {% endif %}"
+                style="font-size: larger; font-weight: bold; font-style: italic; line-height: 3px;">{{ message }}
+            </div>
         {% endfor %}
     </div>
 {% endif %}
@@ -20,15 +22,21 @@
                 <img src="{{ post.picture.url }}" alt="img" style="width: 50px; height: 50px; object-fit: cover;">
                 {% endif %}
                 <p>{{ post.content }}</p> <hr> <br>
-                <h2>Comments</h2>
+                <h2 class="text-primary">Comments</h2>
                 {% for comment in comments %}
-                    <p><strong>{{ comment.user.username }}:</strong> {{ comment.content }}</p>
+                    <p>
+                        <strong>{{ comment.your_name }}:</strong> {{ comment.comment_on_the_post }} <br>
+                        <small>{{ comment.date }} </small><br>
+                        {% if post.author == request.user %}
+                                <a href="{% url 'comment-delete' id=post.id comment_id=comment.id %}" class="comment-delete" type="button">Delete Comment</a>
+                        {% endif %}<hr>
+                    </p>
                 {% empty %}
                     <p>No comments yet. Be the first to comment!</p>
                 {% endfor %}
 
-                <h3>Want to Leave a Comment?</h3>
-                <form method="post">
+                <h3>Leave your Comment below</h3>
+                <form method="post" action= "{% url 'post-detail' id=post.id %}">
                     {% csrf_token %}
                     {{ comment_form|crispy }}
                     <input type="hidden" name="post_id" value="{{ post.id }}">

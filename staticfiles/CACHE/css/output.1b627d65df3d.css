@@ -1,0 +1,1 @@
+$border-count:100;// Number of borders $border-spacing:5px;// Initial border spacing $colors:red,green,blue,yellow,purple,orange,pink,lime,violet,brown,teal,magenta;// Example colors // Loop to generate borders .about-image{&:hover{@for $i from 1 through $border-count{box-shadow:0 0 0 ($i * $border-spacing) #{nth($colors,$i % length($colors) + 1)}}}}

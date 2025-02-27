@@ -1,0 +1,30 @@
+{% extends 'partials/base.html' %}
+{% block title %} Feedbacks {% endblock %}
+{% load crispy_forms_tags %}
+{% block content %}
+
+{% load static %}
+{% if messages %}
+    <div class="alert-container">
+        {% for message in messages %}
+            <div class="alert alert-success text-center" style="font-size: larger; font-weight: bold; font-style: italic;">{{ message }}</div>
+        {% endfor %}
+    </div>
+{% endif %}
+
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="card col-md-7 mt-1">
+            <div class="card-body "></div>
+            <h2 class="text-primary">Users' Feedbacks:</h2>
+            <p>Only admin(s) will be able to view</p>
+            {% for feedback in feedbacks %}
+            <p><h4 style="display: inline;">{{feedback.your_name}} said: </h4>{{feedback.message}} <br>
+                <small>On {{feedback.date}}</small>
+            </p> 
+            {% endfor %}
+        </div>
+    </div>
+</div>
+{% include 'partials/footer.html' %}
+{% endblock %}

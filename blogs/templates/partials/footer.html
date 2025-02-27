@@ -1,27 +1,61 @@
 {% load static %}
-<!-- <footer class="footer text-center me-auto bg-success">
-    <div class=" ">
-        <h2 >This is the footer</h2>
-    </div>
-</footer> -->
 
-<footer class="footer text-center bg-success" style=" position: relative; bottom: 0;">
-    <br>
-  
-    <p>
-      <a href="#" class="fa fa-facebook"></a>
-      <a href="#" class="fa fa-whatsapp"></a>
-      <a href="#" class="fa fa-instagram"></a>
-      <a href="#" class="fa fa-twitter"></a>
-    </p>
-    <div class="container">
-      <div class="row">
-        <div class="col-md-12 col-sm-12">
-          <div style="color: white;" class="wow fadeInUp footer-copyright">
-            <p>Blog Site in Python using Django Framework<br>
-              &copy; 2022 Developed By Capital Capis </p>
-          </div>
-        </div>
+<footer class="footer justify-content-center bg-success" style=" position: relative; bottom: 0;">
+  <div class="row">
+    <div class="col-md-3 justify-content-center mt-2" style="border-right: 1px solid #f8f6f6;">
+      <div class="footer-nav ms-3">
+          <p class="text-white fs-5 footer-text">We Highly value your Views. Want to contact Us? 
+            Click <br> <a class="" href="{% url 'blog-contact' %}">Here</a>
+          </p>
       </div>
     </div>
-  </footer>
+      <div class="col-md-6 text-center mt-2" style="border-right: 1px solid #f5eeee;">
+        <p>
+          <a href="#" class="fa fa-facebook"></a>
+          <a href="#" class="fa fa-whatsapp"></a>
+          <a href="#" class="fa fa-instagram"></a>
+          <a href="#" class="fa fa-twitter"></a>
+        </p>
+        <div class="container">
+          <div class="row">
+            <div class="col-md-12 col-sm-12">
+              <div style="color: white;" class="wow fadeInUp footer-copyright">
+                <p>Blog Site in Python using Django Framework<br>
+                  &copy; 2025 Developed By Capital Capis </p>
+              </div>
+            </div>
+          </div>
+      </div>
+    </div>
+    <div class="col-md-3">
+      <div>
+        <button onclick="scrollToTop()" class="page-up-btn" id="page-up-btn">
+          <i class="fas fa-arrow-up"></i><br> <span class="" style="font-size:small;">Top</span>  
+      </button>
+      </div>
+    </div>
+  </div>
+</footer>
+<script>
+  function scrollToTop() {
+      window.scrollTo({
+          top: 0,
+          behavior: 'smooth'  // Smooth scroll animation
+      });
+  }
+  // Function to check the page scroll position
+window.onscroll = function(){
+  var pageUpBtn = document.getElementById("page-up-btn");
+  var scrollPosition = window.scrollY; //current vertical scroll position
+  var windowHeight = window.innerHeight; //height of the view port
+  var documentHeight = document.documentElement.scrollHeight; //total heigh of the page
+
+  //Check if the user is within the page up showing range
+if (documentHeight - windowHeight - scrollPosition < 50 ) {
+  pageUpBtn.style.display = 'block';
+}
+else {
+  pageUpBtn.style.display = 'none'
+}
+};
+</script>
