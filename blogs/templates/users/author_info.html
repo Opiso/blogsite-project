@@ -17,9 +17,13 @@
                         {% if profile.brief_description %}
                         <p class="fs-4">{{ profile.brief_description }}.</p>
                         {% endif %}
-                        <p class="fs-5"> {% if profile.user.email %} Feel free to contact me via <a href="">
-                             {{profile.user.email}} {% endif %}</a> {% if request.user.author.phone_number %} or call or Whatsapp the Number - {{profile.phone_number}} {% endif %}
-                        </p>
+                        <p class="fs-5"> {% if profile.user.email %} Feel free to contact <span style="text-transform: capitalize;">{{user.username}}</span> by: <br>
+                            Emailing - <span class="text-primary" style="font-style: italic;">{{profile.user.email}} </span> <br>
+                                {% endif %}
+                            {% if request.user.author.phone_number %} 
+                            Sending a Whatsapp message to the Number - <span style="font-style: italic; font-weight: bold;">{{profile.phone_number}}</span> 
+                            {% endif %}
+                        </p> 
                     </div>
                 </div>
             </div>

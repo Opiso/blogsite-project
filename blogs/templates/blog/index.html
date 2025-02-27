@@ -35,7 +35,7 @@
             </div>
         </div>
         <div class="col-md-8">
-            {% for post in posts %}
+            {% for post in page_obj %}
             <div class="card shadow my-3">
                 <div class="card-body">
                     <div class="row">
@@ -83,6 +83,38 @@
                 </div> 
             </div>
             {% endfor %}
+            <div class="pagination w-75" >
+                <span class="step-links bg-secondary">
+                    <span>
+                    {% if page_obj.has_previous %}
+                    {% if page_obj.previous_page_number != 1 %}
+                        <a class="" href="?query={{ request.GET.query }}&page=1">&laquo; First page</a>
+                        <a class="" href="?query={{ request.GET.query }}&page={{ page_obj.previous_page_number }}">Previous</a>
+                    {% else %}
+                        <!-- <a class="" href="?query={{ request.GET.query }}&page=1">&laquo; First page</a> -->
+                        <a class="" href="?query={{ request.GET.query }}&page={{ page_obj.previous_page_number }}">Previous</a>
+                    {% endif %}
+                    {% endif %}
+                    </span>
+            
+                    <span class="current">
+                        Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}
+                    </span>
+
+                    <span>
+            
+                    {% if page_obj.has_next %}
+                    {% if page_obj.next_page_number != page_obj.paginator.num_pages %}
+                        <a class="" href="?query={{ request.GET.query }}&page={{ page_obj.next_page_number }}">Next</a>
+                        <a class="" href="?query={{ request.GET.query }}&page={{ page_obj.paginator.num_pages }}">Last page &raquo;</a>
+                    {% else %}
+                        <a class="" href="?query={{ request.GET.query }}&page={{ page_obj.next_page_number }}">Next</a>
+                        <!-- <a class="" href="?query={{ request.GET.query }}&page={{ page_obj.paginator.num_pages }}">Last page &raquo;</a> -->
+                    {% endif %}
+                    {% endif %}
+                    </span>
+                </span>
+            </div>
         </div>
     </div>
 </div>

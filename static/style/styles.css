@@ -221,12 +221,12 @@ div .cancel_btn:hover{
 }
 .about-image:hover{
     outline: 1px solid red;    
-            outline-offset: -5px;      
+            outline-offset: 0px;      
             box-shadow:
-                0 0 0 5px green,      
-                0 0 0 10px blue,      
-                0 0 0 15px yellow,    
-                0 0 0 20px purple;     
+                0 -5px 0 5px green,      
+                0 -10px 0 10px blue,      
+                0 -15px 0 15px purple,
+                0 -20px 0 20px yellow; 
     cursor: pointer;
     transform: scale(0.5);
 }
@@ -322,3 +322,24 @@ ul{
                 text-align: center;
             }
         }
+
+.step-links span {
+    color: white;
+    text-decoration: none;
+    margin-right: 7px;
+
+}
+.step-links span a {
+    color: greenyellow;
+    text-decoration: none;
+    margin-right: 7px;
+}
+.pagination{
+    justify-content: center;
+}
+
+.step-links a:hover {
+    color: blue;
+    border-bottom: 1px solid blue;
+    transition: 0.5s ease;
+}

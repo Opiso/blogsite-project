@@ -7,6 +7,8 @@ import tempfile
 from django.shortcuts import get_object_or_404
 import os
 from django.contrib.auth.decorators import login_required
+from django.core.paginator import Paginator
+
 
 
 # Create your views here.
@@ -35,10 +37,15 @@ def index(request):
             form = PostModelForm(form_data)  # Pre-populate the form with saved data
         else:
             form = PostModelForm()
-            
+        
+        paginator = Paginator(posts, 2)  
+        page_number = request.GET.get('page')
+        page_obj = paginator.get_page(page_number)
+
         context = {
         'posts' : posts,
         'form' : form,
+        'page_obj': page_obj,
         }
 
     return render(request, 'blog/index.html', context)
@@ -173,30 +180,26 @@ def feedbacks(request):
     return render(request, 'blog/feedbacks.html', instance )
 
 def search_view(request):
-    # Create a search form and handle search queries
-    # search_form = SearchForm(request.GET)
     query = request.GET.get('query', '')
+    form = PostModelForm()
+    posts = PostModel.objects.all()
 
-    # Filter products based on the search query
-    products = PostModel.objects.all()
     if query:
-        products = products.filter(title__icontains=query)
+        posts = posts.filter(title__icontains=query) | posts.filter(author__username__icontains=query)
 
-    # Get the count of items in the cart from the session
-    # if 'cart' in request.session:
-    #     cart = request.session['cart']
-    #     product_count_in_cart = len(set(cart))  # Count unique product IDs
-    # else:
-    #     product_count_in_cart = 0
+    paginator = Paginator(posts, 1)  
+    page_number = request.GET.get('page')
+    page_obj = paginator.get_page(page_number)
 
-    # Define the label for search results
     word = "Search Results:"
 
-    # Render the appropriate template depending on whether the user is authenticated
-    context = {
-        'products': products,
-        'word': word,
-    }
 
+
+    context = {
+        'form' : form,
+        'posts': posts,
+        'word': word,
+        'page_obj' : page_obj
+    }
 
     return render(request, 'blog/search_results.html', context)
