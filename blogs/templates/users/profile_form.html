@@ -10,7 +10,7 @@
     }
 </style>
 <div class="bg-dark">
-<div class="container my-1 bg-success" style="background-color: wheat;">
+<div class="container my-1 bg-success">
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card shadow my-3">
@@ -25,6 +25,7 @@
                     <span class="text-dark">Profile Picture: </span><img src="{{request.user.author.profile_picture.url}}" alt="" style="width: 150px; height: 150px; object-fit: cover; border: 1px solid black;"><hr>
                     <div class="alert text-white bg-dark">
                         <p><span>Username: </span> {{ user.username }}</p>
+                        <p>{% if user.is_staff %}<span> Is Admin? - </span>YES {% endif %}</p>
                         <p> <span>Full Name: </span> {{ user.first_name }} {{ user.last_name }}</p>
                         <p><span>Email Address: </span> {{ user.email }}</p>
                         <p><span>Phone Number: </span> {{ request.user.author.phone_number }}</p>

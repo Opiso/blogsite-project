@@ -13,8 +13,13 @@
           <span class="navbar-toggler-icon"></span>
         </button>
       <div class="row row1 collapse navbar-collapse " id="navbarSupportedContent">
-        <div class="d-flex " id="linked" style="height: 50px;">
-          <ul class="navbar-nav me-auto mb-lg-0 d-flex fs-3" id="list">
+        <div class="d-flex" id="linked" style="height: 50px;">
+          <ul class="navbar-nav me-auto fs-4 mb-lg-0 d-flex" id="list">
+            {% if request.user.is_authenticated and request.user.is_staff %}
+            <li class="nav-item" id="item">
+              <a class="nav-link pt-0 admin fs-2 text-light me-5" id="admin" aria-current="page" href="{% url 'blog-admin-home' %}">Admin Dashboard</a>
+            </li>
+            {% endif %}
             <li class="nav-item" id="item">
               <a class="nav-link pt-0 home" id="home" aria-current="page" href="{% url 'blog-index' %}">Home</a>
             </li>
@@ -36,7 +41,7 @@
               {% if request.user.is_authenticated %}
 
             <li>
-              <a class="nav-link me-3 fs-5" href="{% url 'users-profile' %}" role="button" data-bs-toggle="" aria-expanded="false">
+              <a class="nav-link me-3" href="{% url 'users-profile' %}" role="button" data-bs-toggle="" aria-expanded="false">
                 {% if request.user.author.profile_picture %}
                 <img src="{{request.user.author.profile_picture.url}}" alt="" style="width: 23px; height: 23px; object-fit: cover; border-radius: 50%;">
                 {% else %}
@@ -52,7 +57,7 @@
                 <button class="nav-link text-white me-2 fs-5" type="submit" style="display: none;">Logout</button>
             </form>
           <li>
-            <a class="nav-link fs-5 ms-2 me-5" href="#" role="button" data-bs-toggle="" aria-expanded="false" onclick="document.getElementById('logout-form').submit();">
+            <a class="nav-link ms-2 me-5" href="#" role="button" data-bs-toggle="" aria-expanded="false" onclick="document.getElementById('logout-form').submit();">
               Logout
             </a>
           </li>
@@ -66,7 +71,7 @@
             </li>
               {% endif %}
           </ul>
-        </div>      
+        </div>
         <div class="d-flex row row2">
             <form class="d-flex me-3" method="GET" action="{% url 'blog-search' %}">
                 <input class="form-control w-75 me-2" type="search" required placeholder="Search Post by Subject or Author Name" aria-label="Search" name="query" value="{{query}}">

@@ -17,11 +17,17 @@
         <div class="card col-md-7 mt-1">
             <div class="card-body "></div>
             <h2 class="text-primary">Users' Feedbacks:</h2>
-            <p>Only admin(s) will be able to view</p>
             {% for feedback in feedbacks %}
-            <p><h4 style="display: inline;">{{feedback.your_name}} said: </h4>{{feedback.message}} <br>
-                <small>On {{feedback.date}}</small>
-            </p> 
+            <p>
+                <h4 style="display: inline;">{{feedback.your_name}} said: </h4>{{feedback.message}} <br>
+                <small>On {{feedback.date}}</small> 
+                {% if request.user.is_authenticated and request.user.is_staff %}
+                <div class="d-flex justify-content-around feedback-action">
+                    <a href="" class="text-success my-3" type="button"> Approve Comment</a>
+                    <a href="" class="text-danger my-3" type="button">Delete Comment</a>
+                </div>
+                {% endif %}
+            </p>  <hr>
             {% endfor %}
         </div>
     </div>

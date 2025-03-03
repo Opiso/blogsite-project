@@ -117,10 +117,5 @@ def create_or_edit_profile(request):
         return redirect('users-profile')
     return render(request, 'users/edit_profile.html', context=mydict)
     
-# def view_profile(request):
-#     try:
-#         profile = AuthorProfile.objects.get(user = request.user)
-#     except AuthorProfile.DoesNotExist:
-#         profile = None
-    
-#     return render(request, 'view_profile.html', {'profile':profile})
+def admin_dashboard(request):
+    return render(request, 'users/admin_dashboard.html')

@@ -28,5 +28,6 @@ urlpatterns = [
     path('profile_form/', views.profile, name='users-profile'),
     path('edit_profile/', views.create_or_edit_profile, name='users-edit_profile'),
     path('author_info/<str:username>/', views.authorinfo, name='users-author_info'),
+    path('admin-home/', views.admin_dashboard, name='blog-admin-home'),
 
 ]

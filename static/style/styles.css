@@ -17,7 +17,6 @@
 }
 #linked ul li a {
     color: white;
-
 }
 .homie{
     color: rgb(5, 238, 238);
@@ -26,7 +25,6 @@
 #linked ul li a:hover {
     background-color: rgb(74, 136, 74);
     border-radius: 10%;
-    color: white;
     border-bottom: 1px solid white;
     transition: 0.5s ease;
 } 
@@ -151,7 +149,7 @@ div .cancel_btn:hover{
     background-size: cover; /* Make sure the background covers the entire viewport */
     background-position: center center;
     position: relative;
-    min-height: 100vh; /* Make the body take up the full height of the viewport */
+    min-height: 50vh; /* Make the body take up the full height of the viewport */
     margin: 0;
   }
   .fish {
@@ -171,16 +169,16 @@ div .cancel_btn:hover{
     }
     25% {
         right: 0%;  
-        top: 50%;
+        top: 25%;
     }
     50% {
         right: 0%;  
-        top: 100%;
+        top: 50%;
         
     }
     75% {
         right: 0%;  
-        top: 50%;
+        top: 25%;
         
     }
     100% {
@@ -231,16 +229,15 @@ div .cancel_btn:hover{
     transform: scale(0.5);
 }
 .footer-nav p a{
-    color: hwb(211 4% 1%);
+    color: hwb(180 2% 5%);
     text-decoration: none;
-    font-weight: bold;
     font-size: x-large;
     align-items: center;
     justify-content: center;
 }
 .footer-nav p a:hover{
-    color: rgb(235, 17, 17);
-    border-bottom: 1px solid rgb(255, 5, 5);
+    color: rgb(253, 0, 0);
+    border-bottom: 1px solid rgb(253, 0, 0);
     transition: 0.5s ease-in;
 }
 ul{
@@ -254,7 +251,7 @@ ul{
     background-color: #007bff;
     color: white;
     border: none;
-    padding: 7px;
+    padding: 10px;
     border-radius: 45%;
     font-size: 20px;
     cursor: pointer;
@@ -298,6 +295,10 @@ ul{
         /* Media Query for smaller screens */
         @media screen and (max-width: 768px) {
             /* Hide the nav links and show the hamburger */
+            .sideframe{
+                width: 8.3333%;
+                position: relative;
+            }
             .navbar .nav-links {
                 display: none;
                 flex-direction: column;
@@ -339,7 +340,33 @@ ul{
 }
 
 .step-links a:hover {
-    color: blue;
-    border-bottom: 1px solid blue;
+    color: white;
+    border-bottom: 1px solid white;
     transition: 0.5s ease;
+}
+
+.footer-nav ul li a {
+    color: hwb(180 2% 5%);
+    font-size: x-large;
+    font-weight: bold;
+    text-decoration: none;
+    margin-right: 23px;
+    
+}
+
+.footer-nav ul li a:hover {
+    color: rgb(253, 0, 0);
+    border-bottom: 1px solid rgb(255, 1, 1);
+    transition: 0.5s ease;
+}
+
+.feedback-action a{
+    font-size: larger;
+    text-decoration: none;
+    opacity: 0.6;
+    font-weight: bold;
+}
+
+.feedback-action a:hover{
+    opacity: 1;
 }
