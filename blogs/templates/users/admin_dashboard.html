@@ -1,5 +1,5 @@
 {% extends 'partials/base.html' %}
-{% block title %} About Us{% endblock %}
+{% block title %} Admin Dashboard {% endblock %}
 {% load crispy_forms_tags %}
 {% block content %}
 
@@ -29,7 +29,7 @@
 
     }
 
-    .admin div div:hover{
+    .admin div div div:hover{
         cursor: pointer;
         opacity: 0.7;
 
@@ -43,21 +43,27 @@
 
 <div class="container admin" style="padding: 30px;">
     <h2 class="d-flex justify-content-center fw-bold">Page Summary</h2>
-    <div>
-        <div class="bg-success text-white rounded">
-            TOTAL USERS: {figure}
+    <div class="row">
+        <div>
+            <div class="col-md-6 bg-success text-white rounded">
+                TOTAL USERS: {figure}
+            </div>
+            <div class="col-md-6 bg-primary text-white rounded">
+                USER WITH MOST POSTS: {username}
+            </div>
         </div>
     </div>
-
-    <div class="row d-flex justify-content-center">
-        <div class="col-md-4 bg-secondary rounded">
-            TOTAL POSTS TODAY: {figure}
-        </div>
-        <div class="col-md-4 bg-primary rounded">
-            USER WITH MOST POSTS: {username}
-        </div>
-        <div class="col-md-3 bg-info rounded">
-            TOTAL POSTS: {figure}
+    <div class="row">
+        <div>
+            <div class="col-md-4 bg-secondary rounded">
+                TOTAL POSTS: {figure}
+            </div>
+            <div class="col-md-4 bg-warning rounded">
+                {February 2025} POSTS: {figure}
+            </div>
+            <div class="col-md-4 bg-info rounded">
+                POSTS TODAY: {figure}
+            </div>
         </div>
     </div>
     <div class="feedbacks">

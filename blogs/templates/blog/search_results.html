@@ -3,11 +3,10 @@
 {% load crispy_forms_tags %}
 {% block content %}
 {% load static %}
-<div class="row">
-<div class="col-md-1 bg-dark text-white sideframe">
-    <div class="fish">
+<div class=" row bg-secondary mt-1 mb-lg-2 text-white">
+    <div class="col-md-1 text-white sideframe">
+
     </div>
-</div>
 <div class="container col-md-10 my-1">
     <div class="row pt-2 mb-lg-0 bg-success">
         <div class="row">
@@ -89,8 +88,12 @@
                 <span class="step-links bg-secondary">
                     <span>
                     {% if page_obj.has_previous %}
+                        {% if page_obj.previous_page_number == 1%}
+                        <a class="" href="?query={{ request.GET.query }}&page={{ page_obj.previous_page_number }}">Previous</a>
+                        {% else %}
                         <a class="" href="?query={{ request.GET.query }}&page=1">&laquo; First page</a>
                         <a class="" href="?query={{ request.GET.query }}&page={{ page_obj.previous_page_number }}">Previous</a>
+                        {% endif %}
                     {% endif %}
                     </span>
             
@@ -101,8 +104,12 @@
                     <span>
             
                     {% if page_obj.has_next %}
+                        {% if page_obj.next_page_number == page_obj.paginator.num_pages %}
+                        <a class="" href="?query={{ request.GET.query }}&page={{ page_obj.next_page_number }}">Next</a>
+                        {% else %}
                         <a class="" href="?query={{ request.GET.query }}&page={{ page_obj.next_page_number }}">Next</a>
                         <a class="" href="?query={{ request.GET.query }}&page={{ page_obj.paginator.num_pages }}">Last page &raquo;</a>
+                        {% endif %}
                     {% endif %}
                     </span>
                 </span>
@@ -113,10 +120,7 @@
         </div>
     </div>
 </div>
-<div class="col-md-1 bg-dark text-white sideframe">
-    <div class="fish">
-    </div>
-</div>
+<div class="col-md-1 text-white sideframe"> </div>
 </div>
 
 <script>

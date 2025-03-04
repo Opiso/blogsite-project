@@ -38,6 +38,7 @@ class Contacts(models.Model):
     subject = models.CharField(max_length=30, null=True,blank=True)
     your_email = models.EmailField(null=True, blank=True)
     message = models.TextField(null=True, blank=True)
+    approved = models.BooleanField(default=False) 
     
     class Meta:
         ordering = ('-date',)

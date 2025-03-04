@@ -77,12 +77,6 @@ def authorinfo(request, username):
     profile = get_object_or_404(Author, user=user)
     return render(request, 'users/author_info.html', {'profile': profile, 'user': user})
 
-# @login_required
-# def profile_view(request):
-#     # Get the current user's profile
-#     profile = UserProfile.objects.get(user=request.user)
-#     return render(request, 'user_profile.html', {'profile': profile})
-
 @login_required
 def create_or_edit_profile(request):
     userform = UserUpdateForm(instance=request.user)

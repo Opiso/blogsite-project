@@ -17,7 +17,7 @@
 {% endif %}
 <div class="container mb-lg-5" style="border: 1px solid green;">
     <div class="ms-3">
-       <h1 class="mt-2 text-success ms-5" style="text-decoration: underline;">About Us</h1>
+       <h1 class="mt-2 text-success ms-5" style="text-decoration: underline;">About Us</h1><br>
        
        
        <h4>Welcome, {% if request.user.is_authenticated %} {{ request.user.first_name }} {{ request.user.last_name }} {% endif %} </h4>

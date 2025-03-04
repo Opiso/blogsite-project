@@ -3,10 +3,10 @@
 {% load crispy_forms_tags %}
 {% block content %}
 {% load static %}
-<div class=" row bg-dark mt-1 mb-lg-2 text-white">
-        <div class="col-md-1 text-white sideframe"> hellooo
+<div class=" row bg-secondary mt-1 mb-lg-2 text-white">
+    <div class="col-md-1 text-white sideframe">
 
-        </div>
+    </div>
 <div class="container col-md-10 my-1">
     <div class="row pt-2 mb-lg-0 bg-success">
         <div class="row">
@@ -67,7 +67,7 @@
                              </p>
                              {% endif %}
                              <small class="ms-3">~by <a class="username" href="{% url 'users-author_info' username=post.author.username %}" >{{ post.author.username }}</a></small> <hr>
-                             <p>Want to comment on this Post? <a class="comments" href="{% url 'post-detail' id=post.id %}">Comments</a></p>
+                             <p>Want to read comments on this Post? <a class="comments" href="{% url 'post-detail' id=post.id %}">Comments</a></p>
                              {% if post.date_updated != post.date_created %}
                              <small>Updated on: {{ post.date_updated }}</small>
                              {% endif %}
@@ -117,10 +117,7 @@
     </div>
     </div>
 </div>
-<div class="col-md-1 text-white sideframe"> 
-    hellooo
-
-</div>
+<div class="col-md-1 text-white sideframe"></div>
 </div>
 <script>
     // Function to show the full content when "See more" is clicked

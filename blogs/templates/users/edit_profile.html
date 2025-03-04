@@ -25,7 +25,10 @@
                     {% csrf_token %}
                     {{ userform|crispy }}
                     {{ authorform|crispy }}
-                    <input class="btn btn-success w-100 text-center" type="submit" value="Update">
+                    <div class="d-flex justify-content-between">
+                        <input class="btn btn-success w-25 text-center" type="submit" value="Update">
+                        <a href="{% url 'users-profile' %}" class="btn btn-secondary text-center w-25"> Don't Update</a>
+                    </div>
                     <hr>
                 </form>
             </div>

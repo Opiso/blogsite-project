@@ -33,7 +33,10 @@ class CommentForm(forms.ModelForm):
         fields = ('your_name','comment_on_the_post' )
 
 class ContactForm(forms.ModelForm):
-    message = forms.CharField(required=False, widget = forms.Textarea(attrs={'class': 'custom-textarea', 'rows': 2, 'placeholder': 'Write your Message'}))    
+    message = forms.CharField(max_length=250, widget = forms.Textarea(attrs={'class': 'custom-textarea', 'rows': 2, 'placeholder': 'Write your Message'}))    
+    your_name = forms.CharField(max_length=100, widget=forms.TextInput(attrs={'class': 'custom-class', 'placeholder': 'Enter your name'}))
+    your_email = forms.CharField(max_length=100, required=False,  widget=forms.TextInput(attrs={'class': 'custom-class', 'placeholder': 'Enter your email address'}))
+    subject = forms.CharField(max_length=100, widget=forms.TextInput(attrs={'class': 'custom-class', 'placeholder': 'What do you want to contact us about?'}))
     class Meta:
         model = Contacts
         fields = ('your_name', 'your_email', 'subject', 'message')

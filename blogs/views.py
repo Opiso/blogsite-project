@@ -16,8 +16,6 @@ from django.core.paginator import Paginator
 
 def index(request):
     posts = PostModel.objects.all()
-    # post_form = PostModelForm()
-    # comment_form = CommentForm()
     if request.method == 'POST':
         form =  PostModelForm(request.POST, request.FILES)
         if form.is_valid():
@@ -78,7 +76,7 @@ def post_detail(request, id):
 def delete_comment(request, id, comment_id):
      blog = get_object_or_404(PostModel, pk = id)
      comment = get_object_or_404(Comment, pk = comment_id, blog = blog)
-     if blog.author != request.user:
+     if blog.author != request.user or not request.user.is_staff:
             messages.error(request, message = "You are not authorized to delete this comment because you're not the post author.")
             return redirect('post-detail', id = id)  # Redirect to the blog list page if the user is not the author
 
@@ -93,6 +91,36 @@ def delete_comment(request, id, comment_id):
         # Show a confirmation page before deletion
         return render(request, 'blog/confirm_comment_delete.html', {'comment': comment})
 
+@login_required
+def admin_delete_feedback(request, feedback_id):
+    # blog = get_object_or_404(PostModel, id=id)
+    feedback = get_object_or_404(Contacts, pk=feedback_id)
+
+    if not request.user.is_staff:
+        messages.error(request, message="You are not authorised to delete ths comment!!")
+        return redirect("blog-feedbacks")
+    if request.method == 'POST':
+        try:
+            feedback.delete()
+            messages.error(request, message="You have successfully deleted the feedback")
+        except Exception as e:
+            messages.error(request, message="Feedback not deleted!")
+        return redirect("blog-feedbacks")
+    else:
+        feedbacks = Contacts.objects.all()
+        return render(request, 'blog/feedbacks.html', {'feedbacks':feedbacks})
+
+def approve_feedback(request, feedback_id):
+    feedback = get_object_or_404(Contacts, pk=feedback_id)
+
+    if not request.user.is_staff:
+        messages.error(request, message="You are not authoriseed to perform this operation!")
+        return redirect("blog-feedbacks")
+    
+    feedback.approved = True
+    feedback.save()
+    messages.success(request, message=f"You have successfully approved the feedback from {feedback.your_name}")
+    return redirect("blog-feedbacks")
 
 def blog_post_list(request):
     form = SearchForm(request.GET)
@@ -133,11 +161,6 @@ def update_blog_post(request, id):
         form = PostModelForm(request.POST, request.FILES, instance=blog_post) # Bind the form with the current blog post
         if form.is_valid():
             form.save() # Save the updated data to the database
-            
-            # if 'image' in request.FILES:
-            #     file_name = os.path.basename(request.FILES['image'].name)
-            #     messages.success(request, message = f"Post updated successfully with {file_name} also added")
-            # else:
             messages.success(request, message = "You successfully updated your post")
             return redirect('blog-index')
         else:
@@ -197,7 +220,6 @@ def search_view(request):
 
     context = {
         'form' : form,
-        'posts': posts,
         'word': word,
         'page_obj' : page_obj
     }

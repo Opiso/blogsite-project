@@ -26,10 +26,12 @@ urlpatterns = [
     path('contact/', views.contact, name='blog-contact'),
     path('feedbacks/', views.feedbacks, name='blog-feedbacks'),
     path('search/', views.search_view, name='blog-search'),
-    path('delete/<int:id>/', views.delete_blog_post, name='blog-delete'),
-    path('update/<int:id>/', views.update_blog_post, name='blog-update'),
+    path('post/delete/<int:id>/', views.delete_blog_post, name='blog-delete'),
+    path('post/update/<int:id>/', views.update_blog_post, name='blog-update'),
     path('post/<int:id>/', views.post_detail, name='post-detail'),
     path('post/<int:id>/comment/<int:comment_id>/delete/', views.delete_comment, name='comment-delete'),
+    path('feedbacks/delete/<int:feedback_id>/', views.admin_delete_feedback, name='feedback-delete'),
+    path('feedbacks/approve/<int:feedback_id>/', views.approve_feedback, name='feedback-approve'),
 
 ]
 
