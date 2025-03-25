@@ -1,2 +1,2 @@
 # blogsite-project
-Authors can always write their opinions on different topics through blogs and share with the public
+Where authors write their opinions on topics of choice and share with the public who can in turn view and reply.
