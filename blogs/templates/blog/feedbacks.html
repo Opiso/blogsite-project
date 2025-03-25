@@ -16,15 +16,15 @@
     <div class="row justify-content-center">
         <div class="card col-md-7 mt-1">
         <div class="card-body ">
-            <h2 class="text-primary">Users' Feedbacks:</h2>
+            <h2 class="text-primary">User Feedbacks:</h2>
             {% for feedback in feedbacks %}
             {% if request.user.is_staff or feedback.approved %}
             <p>
-                <h4 style="display: inline;">{{feedback.your_name}} said: </h4> <p>{{feedback.message}}</p>
+                <h4 style="display: inline;">{{feedback.your_name}} said: </h4> <p style="font-style: italic;">{{feedback.message}}</p>
                 <small>On {{feedback.date}}</small> 
                 {% if request.user.is_authenticated and request.user.is_staff %}
                 <div class=" feedback-action">
-                    <form method="POST" class="d-flex justify-content-around" action="{% url 'feedback-delete' feedback_id=feedback.id %}" id="feedback-delete-form-{{ feedback.id }}">
+                    <form method="POST" class="d-flex justify-content-around" action="" id="feedback-delete-form-{{ feedback.id }}">
                         {% csrf_token %}
 
                         {% if not feedback.approved %}
@@ -32,28 +32,17 @@
                         {% else %}
                         <a href="#" class="text-success" style="opacity: 1;">Feedback Approved</a>
                         {% endif %}
-                        <a href="#" id="feedback-delete-link" class="text-danger" onclick ="deleteFeedback( {{feedback.id}} )">Delete Feedback</a>
+                        <a href="{% url 'feedback-delete' feedback_id=feedback.id %}" id="feedback-delete-link" class="text-danger" onclick = "return confirm ( 'Do you want to delete this feedback?')">Delete Feedback</a>
                     </form>
                     <hr>
                   </div>
                 {% endif %}
-            </p> <hr>
+            </p>
             {% endif %} 
             {% endfor %} 
         </div>
         </div>
     </div>
 </div>
-<script>
-    function deleteFeedback(feedbackId) {
-        // Get the form using the unique feedback ID
-        var form = document.getElementById('feedback-delete-form-' + feedbackId);
-
-        // Check if form exists before submitting
-        if (form) {
-            form.submit(); // Submit the form
-        }
-    }
-</script>
 {% include 'partials/footer.html' %}
 {% endblock %}

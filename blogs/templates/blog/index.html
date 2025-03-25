@@ -67,12 +67,12 @@
                              </p>
                              {% endif %}
                              <small class="ms-3">~by <a class="username" href="{% url 'users-author_info' username=post.author.username %}" >{{ post.author.username }}</a></small> <hr>
-                             <p>Want to read comments on this Post? <a class="comments" href="{% url 'post-detail' id=post.id %}">Comments</a></p>
+                             <p>Want to see comments on this Post? <a class="comments" href="{% url 'post-detail' id=post.id %}">Comments</a></p>
                              {% if post.date_updated != post.date_created %}
                              <small>Updated on: {{ post.date_updated }}</small>
                              {% endif %}
                              <div>
-                                {% if post.author == request.user %}
+                                {% if post.author == request.user or request.user.is_staff %}
                                 <a href="{% url 'blog-update' id=post.id %}" class="btn btn-outline-success my-3 me-3" type="button">Update Post</a>
                                 <a href="{% url 'blog-delete' id=post.id %}" class="btn btn-outline-danger" type="button">Delete Post</a>
                                 {% endif %}

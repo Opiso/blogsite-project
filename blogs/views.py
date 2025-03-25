@@ -11,6 +11,7 @@ from django.core.paginator import Paginator
 
 
 
+
 # Create your views here.
 
 
@@ -72,7 +73,7 @@ def post_detail(request, id):
 
     return render(request, 'blog/post_detail.html', context)
 
-@login_required
+@login_required(login_url="users-login")    
 def delete_comment(request, id, comment_id):
      blog = get_object_or_404(PostModel, pk = id)
      comment = get_object_or_404(Comment, pk = comment_id, blog = blog)
@@ -91,7 +92,7 @@ def delete_comment(request, id, comment_id):
         # Show a confirmation page before deletion
         return render(request, 'blog/confirm_comment_delete.html', {'comment': comment})
 
-@login_required
+@login_required(login_url="users-login")    
 def admin_delete_feedback(request, feedback_id):
     # blog = get_object_or_404(PostModel, id=id)
     feedback = get_object_or_404(Contacts, pk=feedback_id)
@@ -99,17 +100,15 @@ def admin_delete_feedback(request, feedback_id):
     if not request.user.is_staff:
         messages.error(request, message="You are not authorised to delete ths comment!!")
         return redirect("blog-feedbacks")
-    if request.method == 'POST':
-        try:
-            feedback.delete()
-            messages.error(request, message="You have successfully deleted the feedback")
-        except Exception as e:
-            messages.error(request, message="Feedback not deleted!")
-        return redirect("blog-feedbacks")
-    else:
-        feedbacks = Contacts.objects.all()
-        return render(request, 'blog/feedbacks.html', {'feedbacks':feedbacks})
+    try:
+        feedback.delete()
+        messages.error(request, message="You have successfully deleted the feedback")
+    except Exception as e:
+        messages.error(request, message="Feedback not deleted!")
+    return redirect("blog-feedbacks")
 
+
+@login_required(login_url="users-login")    
 def approve_feedback(request, feedback_id):
     feedback = get_object_or_404(Contacts, pk=feedback_id)
 
@@ -121,16 +120,6 @@ def approve_feedback(request, feedback_id):
     feedback.save()
     messages.success(request, message=f"You have successfully approved the feedback from {feedback.your_name}")
     return redirect("blog-feedbacks")
-
-def blog_post_list(request):
-    form = SearchForm(request.GET)
-    posts = PostModel.objects.all()
-
-    if form.is_valid():
-        query = form.cleaned_data['query']
-        posts = posts.filter(title__icontains=query) | posts.filter(content__icontains=query)
-
-    return render(request, 'blog/blog_post_list.html', {'form': form, 'posts': posts})
 
 
 @login_required
@@ -175,6 +164,7 @@ def update_blog_post(request, id):
 def about(request):
     return render(request, 'blog/about.html')
 
+
 def contact(request):
     contact_form =  ContactForm()
     if request.method == 'POST':
@@ -191,6 +181,7 @@ def contact(request):
         'contact_form':contact_form,
     }
     return render(request, 'blog/contact.html', instance)
+
 
 def feedbacks(request):
     feedbacks = Contacts.objects.all()
@@ -209,19 +200,20 @@ def search_view(request):
 
     if query:
         posts = posts.filter(title__icontains=query) | posts.filter(author__username__icontains=query)
-
-    paginator = Paginator(posts, 1)  
+        post_number = posts.count()
+    paginator = Paginator(posts, 3)  
     page_number = request.GET.get('page')
     page_obj = paginator.get_page(page_number)
 
-    word = "Search Results:"
+    word = f"Search Results: {post_number} {'post' if post_number == 1 else '' if post_number == 0 else 'posts'}"
 
 
 
     context = {
         'form' : form,
         'word': word,
-        'page_obj' : page_obj
+        'page_obj' : page_obj,
+        'post_number': post_number,
     }
 
     return render(request, 'blog/search_results.html', context)

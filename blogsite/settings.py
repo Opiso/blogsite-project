@@ -125,11 +125,13 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGE_CODE = 'en-us'
 
+LOGIN_URL = 'users-login'
+
+# USE_I18N = True
+
+# USE_TZ = True
+
 TIME_ZONE = 'Africa/Nairobi'
-
-USE_I18N = True
-
-USE_TZ = True
 
 CRISPY_ALLOWED_TEMPLATE_PACKS = "bootstrap5"
 
@@ -163,3 +165,21 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')  # Directory where uploaded files a
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 # AUTH_USER_MODEL = 'users.CustomUser'
+
+# Email backend for development 
+# EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+
+# For production 
+
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+
+
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+EMAIL_HOST_USER = 'okothcapis@gmail.com'
+EMAIL_HOST_PASSWORD = '@Kagawa10'
+DEFAULT_FROM_EMAIL = 'okothcapis@gmail.com'
+
+# from django.core.mail import send_mail
+# send_mail('Test Email', 'This is a test email.', 'capisokoth@gmail.com', ['capisokoth@gmail.com'])

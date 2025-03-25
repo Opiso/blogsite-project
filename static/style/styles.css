@@ -74,7 +74,6 @@ div .cancel_btn:hover{
 .edit-profile:hover{
     color: blueviolet;
     border-bottom: 1px solid blueviolet;
-    transition: 1s ease-in;
 }
 
 .username{
@@ -134,8 +133,8 @@ div .cancel_btn:hover{
     margin: 0 20px;
   }
 
-  .fa-twitter {
-    background: #55ACEE;
+  .fa-times {
+    background: rgba(8, 8, 8, 0.678);
     color: white;
     margin: 20px;
   }
@@ -230,15 +229,16 @@ div .cancel_btn:hover{
 }
 .footer-nav p a{
     color: hwb(180 2% 5%);
+    border-bottom: 1px solid hwb(180 2% 5%);
+    font-weight: bold;
     text-decoration: none;
-    font-size: x-large;
+    font-size: large;
     align-items: center;
     justify-content: center;
 }
 .footer-nav p a:hover{
     color: rgb(253, 0, 0);
     border-bottom: 1px solid rgb(253, 0, 0);
-    transition: 0.5s ease-in;
 }
 ul{
     list-style-type: none;
@@ -347,17 +347,18 @@ ul{
 
 .footer-nav ul li a {
     color: hwb(180 2% 5%);
-    font-size: x-large;
+    font-size: small;
     font-weight: bold;
     text-decoration: none;
+    border-bottom: 1px solid hwb(180 2% 5%);
     margin-right: 23px;
+
     
 }
 
 .footer-nav ul li a:hover {
     color: rgb(253, 0, 0);
     border-bottom: 1px solid rgb(253, 0, 0);
-    transition: 0.5s ease;
 }
 
 .feedback-action a{

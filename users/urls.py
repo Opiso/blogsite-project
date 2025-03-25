@@ -18,7 +18,10 @@ from django.contrib import admin
 from django.urls import path
 from django.contrib.auth import views as auth_view
 from .import views
+from django.contrib.auth import views as auth_views
 
+
+# app_name = 'users'
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('sign_up/', views.author_signup_view, name='users-sign_up'),
@@ -29,5 +32,10 @@ urlpatterns = [
     path('edit_profile/', views.create_or_edit_profile, name='users-edit_profile'),
     path('author_info/<str:username>/', views.authorinfo, name='users-author_info'),
     path('admin-home/', views.admin_dashboard, name='blog-admin-home'),
+    path('customers/', views.view_users, name='blog-customers'),
+    path('password_reset/', auth_views.PasswordResetView.as_view(), name='password_reset'),
+    path('password_reset/done/', auth_views.PasswordResetDoneView.as_view(), name='password_reset_done'),
+    path('reset/<uidb64>/<token>/', auth_views.PasswordResetConfirmView.as_view(), name='password_reset_confirm'),
+    path('reset/done/', auth_views.PasswordResetCompleteView.as_view(), name='password_reset_complete'),
 
 ]

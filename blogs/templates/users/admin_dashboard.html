@@ -41,35 +41,45 @@
     }
 </style>
 
+{% if request.user.is_staff %}
 <div class="container admin" style="padding: 30px;">
+    <h2 class="d-flex justify-content-center text-primary fw-bold">I'm Here because I'm Admin!!</h2><hr class="fw-bold" style="color: black; width: 62%; margin-left: 20%; margin-right: 20%;">
     <h2 class="d-flex justify-content-center fw-bold">Page Summary</h2>
     <div class="row">
         <div>
             <div class="col-md-6 bg-success text-white rounded">
-                TOTAL USERS: {figure}
-            </div>
+                <div>
+                <p>TOTAL USERS: {{ total_users }} </p>
+                </div>
+            </div>            
             <div class="col-md-6 bg-primary text-white rounded">
-                USER WITH MOST POSTS: {username}
+                USER WITH MOST POSTS: {{most_active_user_name}} ({{most_active_user_posts}} posts)
             </div>
         </div>
     </div>
     <div class="row">
         <div>
             <div class="col-md-4 bg-secondary rounded">
-                TOTAL POSTS: {figure}
+                <p>Total Posts: {{ total_posts }}</p>
             </div>
             <div class="col-md-4 bg-warning rounded">
-                {February 2025} POSTS: {figure}
+                POSTS in {{month}} {{year}} : {{ posts_this_month}}
             </div>
             <div class="col-md-4 bg-info rounded">
-                POSTS TODAY: {figure}
+                TODAY's POSTS: {{ posts_today }}
             </div>
         </div>
     </div>
     <div class="feedbacks">
-        <p class="fs-3 text-primary m-3"><a style="text-decoration: none;" href="{% url 'blog-feedbacks' %}">Feedbacks</a></p>
+        <p><a class="fs-3 text-primary m-3" style="text-decoration: none;" href="{% url 'blog-customers' %}">View All Users</a></p>
+        <p><a class="fs-3 text-primary m-3" style="text-decoration: none;" href="{% url 'blog-feedbacks' %}">View Feedbacks</a></p>
     </div>
 </div>
+{%else%}
+<div class="container admin p-5">
+    <h3 class="justify-content-center">Hi {{request.user.first_name}}, Sorry but you cannot view that page because you are not an Admin. <br> Welcome <a class="comments" href="{% url 'blog-index' %}"> HOME</a></h3>
+</div>
+{% endif %}
 <div class="mt-5">
 {% include 'partials/footer.html' %}
 </div>

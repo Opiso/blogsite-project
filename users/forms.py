@@ -90,6 +90,7 @@ class UserUpdateForm(forms.ModelForm):
         model = User
         fields = ('username','first_name', 'last_name', 'email')
 class ProfileUpdateForm(forms.ModelForm):
+    phone_number = forms.IntegerField(required=False)
     profile_picture = forms.ImageField(required=False, widget=forms.ClearableFileInput(attrs={'class': 'custom-image', 'placeholder': 'Choose a profile Image'}))   
     brief_description = forms.CharField(required=False, widget = forms.Textarea(attrs={'class': 'custom-textarea', 'rows': 4, 'placeholder': 'Briefly decribe yourself'}))    
     class Meta:
