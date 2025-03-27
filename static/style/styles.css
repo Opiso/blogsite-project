@@ -11,16 +11,16 @@
     color: blueviolet;
     transition: 2s ease-in;
 }
-#heady{
-    color: red;
-    background-color: yellow;
-}
 #linked ul li a {
     color: white;
+    padding-bottom: 5px;
 }
 .homie{
     color: rgb(5, 238, 238);
     text-decoration: underline;
+}
+#linked ul li #admin{
+    color: #e8f2f7;
 }
 #linked ul li a:hover {
     background-color: rgb(74, 136, 74);
@@ -28,15 +28,18 @@
     border-bottom: 1px solid white;
     transition: 0.5s ease;
 } 
+.active{
+    border-radius: 10% !important;
+    color: #81D4FA !important;
+    border-bottom: 1px solid #81D4FA !important;
+}
 .row2 form button{
     color: white;
 }
 .row2 form button:hover{
     color: black;
-    background-color: rgb(171, 191, 245);
+    background-color: #81D4FA;
     transition: 0.5s ease;
-
-
 }
 
 #logo_head {
@@ -196,10 +199,13 @@ div .cancel_btn:hover{
 .comments, .comment-delete, .feedbacks-link{
     text-decoration: none;
 }
-.comments:hover, .comment-delete:hover, .feedbacks-link:hover{
+.comments:hover, .comment-delete:hover{
     color: blueviolet;
     border-bottom: 1px solid blueviolet;
     transition: 0.5s ease;
+}
+.feedbacks-link:hover{
+    border-bottom: 1px solid blueviolet;
 }
 .alert-errors{
     color: red;
@@ -228,8 +234,7 @@ div .cancel_btn:hover{
     transform: scale(0.5);
 }
 .footer-nav p a{
-    color: hwb(180 2% 5%);
-    border-bottom: 1px solid hwb(180 2% 5%);
+    color: #81D4FA;
     font-weight: bold;
     text-decoration: none;
     font-size: large;
@@ -237,8 +242,7 @@ div .cancel_btn:hover{
     justify-content: center;
 }
 .footer-nav p a:hover{
-    color: rgb(253, 0, 0);
-    border-bottom: 1px solid rgb(253, 0, 0);
+    text-decoration: underline;
 }
 ul{
     list-style-type: none;
@@ -346,19 +350,19 @@ ul{
 }
 
 .footer-nav ul li a {
-    color: hwb(180 2% 5%);
+    color: #81D4FA;
     font-size: small;
     font-weight: bold;
     text-decoration: none;
-    border-bottom: 1px solid hwb(180 2% 5%);
+    border-bottom: 1px solid #81D4FA;
     margin-right: 23px;
 
     
 }
 
 .footer-nav ul li a:hover {
-    color: rgb(253, 0, 0);
-    border-bottom: 1px solid rgb(253, 0, 0);
+    color: white;
+    border-bottom: 1px solid white;
 }
 
 .feedback-action a{
@@ -370,4 +374,27 @@ ul{
 
 .feedback-action a:hover{
     opacity: 1;
+}
+#loader {
+    border: 2px solid green;
+    border-radius: 50%;
+    border-top: 2px solid white;
+    width: 70px;
+    height: 70px;
+    animation: spin 1s linear infinite;
+}
+
+.center {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    margin: auto;
+}
+
+@keyframes spin {
+    100% {
+        transform: rotate(360deg);
+    }
 }

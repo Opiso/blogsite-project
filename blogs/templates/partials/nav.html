@@ -15,15 +15,16 @@
         </button>
       <div class="row row1 collapse navbar-collapse " id="navbarSupportedContent">
         <div class="d-flex" id="linked" style="height: 50px;">
-          <ul class="navbar-nav me-auto fs-4 mb-lg-0 d-flex" id="list">
+          <ul class="navbar-nav me-auto fs-4 d-flex" id="list">
             {% if request.user.is_authenticated and request.user.is_staff %}
             <li class="nav-item" id="item">
-              <a class="nav-link pt-0 admin fs-2 text-light me-5" id="admin" aria-current="page" href="{% url 'blog-admin-home' %}">Admin Dashboard</a>
+              <a class="nav-link pt-0 admin fs-2 me-5" id="admin" aria-current="page" href="{% url 'blog-admin-home' %}">Admin Dashboard</a>
             </li>
             {% endif %}
             <li class="nav-item" id="item">
-              <a class="nav-link pt-0 home" id="home" aria-current="page" href="{% url 'blog-index' %}">Home</a>
+              <a class="nav-link pt-0 home " id="home" aria-current="page" href="{% url 'blog-index' %}">Home</a>
             </li>
+      
             <li class="nav-item">
               <a class="nav-link ms-2 pt-0 home" href="{% url 'blog-about' %}">About Us</a>
             </li>
@@ -31,13 +32,6 @@
               <a class="nav-link ms-2 pt-0 home" href="{% url 'blog-contact' %}">Contact Us</a>
             </li>
           </ul>
-          <style>
-            .homie{
-              color: red;
-              text-decoration: underline;
-            }
-          </style>
-
           <ul class="navbar-nav ms-auto mb-lg-0 d-flex" >
               {% if request.user.is_authenticated %}
 
@@ -81,7 +75,19 @@
         </div>
       </div>
     </div>
-    <div class="hamburger" id="hamburger-menu">
-      <i class="fas fa-bars"></i> <!-- Hamburger Icon from FontAwesome -->
-  </div>
   </nav>
+  <script>
+    // Get all anchor tags in the navigation
+    const navLinks = document.querySelectorAll('#linked ul li a');
+  
+    // Get the current page URL
+    const currentPage = window.location.pathname;
+  
+    // Loop through all links and add 'active' class to the current page link
+    navLinks.forEach(link => {
+      if (link.getAttribute('href') === currentPage) {
+        link.classList.add('active');
+      }
+    });
+  </script>
+  
