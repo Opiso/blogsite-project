@@ -4,13 +4,7 @@
 #navbarSupportedContent #linked #list #item:hover {
     color: white;
 }
-.headtag a:hover {
-    color: rgb(92, 102, 80);
-}
-.headtag:hover{
-    color: blueviolet;
-    transition: 2s ease-in;
-}
+
 #linked ul li a {
     color: white;
     padding-bottom: 5px;
@@ -154,40 +148,6 @@ div .cancel_btn:hover{
     min-height: 50vh; /* Make the body take up the full height of the viewport */
     margin: 0;
   }
-  .fish {
-    position: absolute;
-    width: 114px;  
-    height: 100vh;
-    background-image: url('/static/images/fish.jpeg');  
-    background-size: contain;
-    background-repeat: no-repeat;
-    animation: swim 7s linear infinite;  /* Animation for the movement */
-}
-
-@keyframes swim {
-    0% {
-        left: 0px;  
-        top: 0;
-    }
-    25% {
-        right: 0%;  
-        top: 25%;
-    }
-    50% {
-        right: 0%;  
-        top: 50%;
-        
-    }
-    75% {
-        right: 0%;  
-        top: 25%;
-        
-    }
-    100% {
-        left: 0%;  
-        top: 0;
-    }
-}
 .contact-details{
     position: relative;
     background-image: linear-gradient(rgb(241, 236, 236), rgba(88, 48, 48, 0.555)), url("/static/images/image.png");
